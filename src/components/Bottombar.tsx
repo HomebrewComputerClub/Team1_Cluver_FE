@@ -40,6 +40,10 @@ const Icon = styled.span<{ isActive: boolean }>`
   text-align: center;
   font-family: ${(props) => props.theme.titleFont};
   cursor: pointer;
+  background: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 `;
 
 const TextDiv = styled.div`
@@ -124,10 +128,11 @@ function Bottombar({ first, second, third }: IBarProps) {
               color: "white",
               /* transform: "scaleY(-1)", */
             }}
+            onClick={() => {
+              navigate("/");
+            }}
           >
-            <Link to="/">
-              <span style={{ color: "white" }}>♣</span>
-            </Link>
+            ♣
           </Icon>
           <Icon isActive={third} onClick={LinktoAdmin}>
             <span

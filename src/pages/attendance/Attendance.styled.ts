@@ -197,7 +197,7 @@ export const Division = styled.div`
 export const Section = styled.div`
   width: 100%;
   height: 370px;
-  height: calc(100vh - 360px);
+  height: calc(100vh - 380px);
   background: ${(props) => props.theme.boxColor};
   position: absolute;
   top: 260px;
@@ -226,11 +226,11 @@ export const MemberDiv = styled.div`
 export const MemberText = styled.div`
   width: 38px;
   height: 33px;
-  display: inline-block;
+  //display: inline-block;
   font-size: 14px;
   font-family: ${(props) => props.theme.textFont};
   font-weight: lighter;
-  margin-left: 1%;
+  margin-left: 1.5%;
   padding-top: 10px;
   text-align: center;
   z-index: 1;

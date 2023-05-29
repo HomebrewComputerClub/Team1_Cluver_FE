@@ -15,7 +15,6 @@ export const Wrap = styled.div`
 
 export const Bg = styled.div`
   width: 100%;
-  height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   background-color: ${(props) => props.theme.bgColor};
   display: flex;
@@ -120,6 +119,10 @@ export const ResImg = styled.div`
   font-family: ${(props) => props.theme.titleFont};
   margin: 5px;
   margin-top: 8px;
+  background: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   //position: absolute;
   :hover {
     cursor: pointer;

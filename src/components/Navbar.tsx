@@ -44,6 +44,8 @@ const Leftdiv = styled.div`
   color: transparent;
   z-index: 10;
   cursor: pointer;
+  height: fit-content;
+  width: fit-content;
 `;
 
 const MenuDiv = styled.div`

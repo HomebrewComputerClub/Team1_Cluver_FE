@@ -11,7 +11,6 @@ const Background = styled.div`
   //background-color: ${(props) => props.theme.bgColor};
 `;
 const Wrap = styled.div`
-  height: 100vh;
   width: 100%;
   @media only screen and (min-width: 1000px) {
     max-width: 360px;

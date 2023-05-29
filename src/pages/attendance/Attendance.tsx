@@ -416,7 +416,7 @@ function Attendance() {
                                 navDiv[`${e.id}`] -= 1;
                               }
                               //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 83.2;
+                              let how = navDiv[`${e.id}`] * 83;
                               clovers.current[
                                 `${e.id}`
                               ].style.transform = `translateX(-${how}px)`;
@@ -441,6 +441,7 @@ function Attendance() {
                               clovers.current[`${e.id}`] = ele;
                             }}
                             style={{
+                              display: "flex",
                               width: "fit-content",
                               transform: `translateX(-${
                                 Math.floor(e.attendances.length / 5) * 83.2
@@ -481,7 +482,15 @@ function Attendance() {
                                       style={{
                                         cursor: "pointer",
                                         marginRight: "5px",
-                                        color: "#9ee69a",
+                                        background: "#9ee69a",
+                                        backgroundClip: "text",
+                                        WebkitBackgroundClip: "text",
+                                        color: "transparent",
+                                        textAlign: "left",
+                                        //border: "1px solid white",
+                                        width: "14.5px",
+                                        margin: "1px",
+                                        display: "inline-block",
                                       }}
                                       onClick={() => {
                                         alert(`${i.club_attendance.date}`);
@@ -499,7 +508,15 @@ function Attendance() {
                                       style={{
                                         cursor: "pointer",
                                         marginRight: "5px",
-                                        color: "grey",
+                                        background: "grey",
+                                        backgroundClip: "text",
+                                        WebkitBackgroundClip: "text",
+                                        color: "transparent",
+                                        textAlign: "left",
+                                        //border: "1px solid white",
+                                        width: "14.5px",
+                                        margin: "1px",
+                                        display: "inline-block",
                                       }}
                                       onClick={() => {
                                         alert(`${i.club_attendance.date}`);
@@ -531,7 +548,7 @@ function Attendance() {
                                 navDiv[`${e.id}`] += 1;
                               }
                               //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 83.2;
+                              let how = navDiv[`${e.id}`] * 83;
                               clovers.current[
                                 `${e.id}`
                               ].style.transform = `translateX(-${how}px)`;
