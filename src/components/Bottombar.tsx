@@ -125,7 +125,9 @@ function Bottombar({ first, second, third }: IBarProps) {
               /* transform: "scaleY(-1)", */
             }}
           >
-            <Link to="/">♣</Link>
+            <Link to="/">
+              <span style={{ color: "white" }}>♣</span>
+            </Link>
           </Icon>
           <Icon isActive={third} onClick={LinktoAdmin}>
             <span
