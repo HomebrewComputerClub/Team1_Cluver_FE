@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = `http://34.64.184.11:8000`;
+export const BASE_URL = `http://cluver.kr:8000`;
 
 export async function loginValidate(id: string, password: string) {
   try {
@@ -14,7 +14,6 @@ export async function loginValidate(id: string, password: string) {
     return response;
   } catch (e: any) {
     return e.response.data.message;
-    console.log(e);
   }
 }
 export async function getClubs(token: string | null) {

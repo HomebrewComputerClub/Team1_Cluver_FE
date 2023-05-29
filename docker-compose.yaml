@@ -1,0 +1,15 @@
+version: "3.7"
+
+# 컴퓨터들
+services:
+  my-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/myfolder/src
+    ports:
+      - 3000:3000
+      - 80:3000
+    env_file:
+      - ./.env.docker
