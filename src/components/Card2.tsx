@@ -44,6 +44,10 @@ const Icon = styled.div`
   border-radius: 50%;
   color: white;
   text-align: center;
+  background: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 `;
 const Logo = styled.img`
   width: 30px;

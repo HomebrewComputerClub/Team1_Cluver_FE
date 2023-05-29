@@ -212,7 +212,10 @@ function Card({ id, name, desc, img, isPrivate, code }: IProps) {
               <Logo ref={imgRef} src={img} onError={handleImgError} />
               <span
                 ref={iconRef}
-                style={{ lineHeight: "160%", display: "none" }}
+                style={{
+                  lineHeight: "160%",
+                  display: "none",
+                }}
               >
                 ♣
               </span>
