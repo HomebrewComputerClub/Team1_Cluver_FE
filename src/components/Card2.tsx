@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { createCheckCode, getCheckCode, tokenValidate } from "../util/api";
 import { useEffect, useRef } from "react";
 const Container = styled.div`
-  width: 75%;
+  width: 100%;
   margin-bottom: 15px;
   border: 1px solid white;
   border-radius: 15px;
@@ -19,7 +19,9 @@ const Container = styled.div`
   :active {
     border: 1px solid transparent;
   }
+  margin: auto;
 `;
+
 const Bg = styled.div`
   width: 100%;
   padding: 18px;
@@ -205,11 +207,7 @@ function Card2({ id, name, desc, img, isPrivate, code }: IProps) {
     checkCodeIsValid();
   }, []);
   return (
-    <Container
-      onClick={() => {
-        window.location.href = `/attendance/${id}`;
-      }}
-    >
+    <Container>
       <Bg>
         <TitleWrapper>
           <TitleWrapper>

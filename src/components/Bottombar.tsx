@@ -121,6 +121,7 @@ function Bottombar({ first, second, third }: IBarProps) {
             style={{
               fontSize: "28px",
               lineHeight: "152%",
+              color: "white",
               /* transform: "scaleY(-1)", */
             }}
           >

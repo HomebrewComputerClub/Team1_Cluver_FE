@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  width: 360px;
+  width: 100%;
+  @media only screen and (min-width: 1000px) {
+    max-width: 360px;
+  }
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   position: absolute;
   top: 0;
   left: 50%;
@@ -13,6 +17,7 @@ export const Wrap = styled.div`
 export const Bg = styled.div`
   width: 100%;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-color: ${(props) => props.theme.bgColor};
   display: flex;
   align-items: center;
@@ -38,7 +43,7 @@ export const Btn = styled.div`
   border-radius: 7px;
   font-size: 15px;
   border: 1px solid white;
-  padding: 11px 12px;
+  padding: 11px 0px;
   cursor: pointer;
   font-family: ${(props) => props.theme.textFont};
   :hover {

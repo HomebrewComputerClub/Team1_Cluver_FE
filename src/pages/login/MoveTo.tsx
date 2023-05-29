@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import Bottombar from "../../components/Bottombar";
-import Card from "../../components/Card";
+import Card2 from "../../components/Card2";
 import { Link, useNavigate } from "react-router-dom";
 import { getClubs, tokenValidate } from "../../util/api";
 import { useRecoilValue } from "recoil";
@@ -9,8 +9,6 @@ import { IClub, manager } from "../../util/atoms";
 import { useEffect, useState } from "react";
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
   width: 100%;
   height: calc(var(--vh, 1vh) * 100);
   //background-color: ${(props) => props.theme.bgColor};
@@ -111,29 +109,11 @@ const CardContainer = styled.div`
   }
 `;
 
-function Login() {
+function MoveTo() {
   const navigate = useNavigate();
   const data = useRecoilValue(manager);
   const [clubs, setClubs] = useState<IClub[]>([]);
 
-  const onAddClub = async () => {
-    const response = await tokenValidate(localStorage.getItem("token"));
-    if (response) {
-      navigate("/addclub");
-    } else {
-      navigate("/login");
-      console.log(response);
-    }
-  };
-  const onDeleteClub = async () => {
-    const response = await tokenValidate(localStorage.getItem("token"));
-    if (response) {
-      navigate("/delete");
-    } else {
-      navigate("/login");
-      console.log(response);
-    }
-  };
   const getClubsData = async () => {
     const response = await getClubs(localStorage.getItem("token"));
     if (response) {
@@ -154,37 +134,41 @@ function Login() {
         <Navbar></Navbar>
         <Container>
           <div style={{ marginBottom: "10px" }}>
-            <UserName>{data.name}</UserName>
-            {clubs.length == 0 ? (
-              <Title> 님이 관리 중인 동아리가 없습니다.</Title>
+            {clubs.length === 0 ? (
+              <>
+                <UserName>{data.name}</UserName>
+                <Title> 님이 관리 중인 동아리가 없습니다.</Title>
+              </>
             ) : (
-              <Title> 님이 관리 중인 동아리입니다.</Title>
+              <Title>이동할 동아리를 선택하세요.</Title>
             )}
           </div>
+
           <CardContainer>
             {clubs.map((club: any) => {
               if (club)
                 return (
-                  <Card
-                    key={club.id}
-                    id={club.id}
-                    name={club.name.toUpperCase()}
-                    desc={club.description}
-                    img={club.img}
-                    isPrivate={club.status == "PRIVATE" ? true : false}
-                    code={club.club_code}
-                  />
+                  <Link
+                    to={`/anonymous/${club.id}`}
+                    style={{
+                      width: "75%",
+                      height: "100%",
+                      marginBottom: "15px",
+                    }}
+                  >
+                    <Card2
+                      key={club.id}
+                      id={club.id}
+                      name={club.name.toUpperCase()}
+                      desc={club.description}
+                      img={club.img}
+                      isPrivate={club.status === "PRIVATE" ? true : false}
+                      code={club.club_code}
+                    ></Card2>
+                  </Link>
                 );
             })}
           </CardContainer>
-          <AddButton onClick={onAddClub}>관리 중인 동아리 추가하기 +</AddButton>
-          {clubs.length == 0 ? (
-            <></>
-          ) : (
-            <TextWrapper style={{ position: "absolute", bottom: "20px" }}>
-              <Text onClick={onDeleteClub}>동아리 삭제하기</Text>
-            </TextWrapper>
-          )}
         </Container>
         <Bottombar first={false} second={false} third={true} />
       </Wrap>
@@ -192,4 +176,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default MoveTo;

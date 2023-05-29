@@ -9,14 +9,17 @@ import { useRecoilState } from "recoil";
 import { IClub, manager } from "../../util/atoms";
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   //background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Wrap = styled.div`
-  width: 360px;
-  height: 100vh;
+  width: 100%;
+  @media only screen and (min-width: 1000px) {
+    max-width: 360px;
+  }
+  height: calc(var(--vh, 1vh) * 100);
   position: absolute;
   top: 0;
   left: 50%;

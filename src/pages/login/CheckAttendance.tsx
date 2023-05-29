@@ -9,13 +9,16 @@ import { IClub, manager } from "../../util/atoms";
 import { useEffect, useState } from "react";
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   //background-color: ${(props) => props.theme.bgColor};
 `;
 const Wrap = styled.div`
-  width: 360px;
-  height: 100vh;
+  width: 100%;
+  @media only screen and (min-width: 1000px) {
+    max-width: 360px;
+  }
+  height: calc(var(--vh, 1vh) * 100);
   position: absolute;
   top: 0;
   left: 50%;
@@ -140,19 +143,29 @@ function CheckAttendance() {
               <Title>출석 확인할 동아리를 선택하세요.</Title>
             )}
           </div>
+
           <CardContainer>
             {clubs.map((club: any) => {
               if (club)
                 return (
-                  <Card2
-                    key={club.id}
-                    id={club.id}
-                    name={club.name.toUpperCase()}
-                    desc={club.description}
-                    img={club.img}
-                    isPrivate={club.status === "PRIVATE" ? true : false}
-                    code={club.club_code}
-                  />
+                  <Link
+                    to={`/attendance/${club.id}`}
+                    style={{
+                      width: "75%",
+                      height: "100%",
+                      marginBottom: "15px",
+                    }}
+                  >
+                    <Card2
+                      key={club.id}
+                      id={club.id}
+                      name={club.name.toUpperCase()}
+                      desc={club.description}
+                      img={club.img}
+                      isPrivate={club.status === "PRIVATE" ? true : false}
+                      code={club.club_code}
+                    ></Card2>
+                  </Link>
                 );
             })}
           </CardContainer>

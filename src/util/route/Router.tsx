@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRouter";
 import CheckAttendance from "../../pages/login/CheckAttendance";
 import Anonymous from "../../pages/anonymous/Anonymous";
 import Menu from "./../../pages/menu/Menu";
+import MoveTo from "./../../pages/login/MoveTo";
 
 function Router() {
   return (
@@ -37,6 +38,7 @@ function Router() {
           <Route path="/checkcode" element={<CheckCode />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/checkattendance" element={<CheckAttendance />} />
+          <Route path="/moveto" element={<MoveTo />} />
         </Route>
       </Routes>
     </BrowserRouter>

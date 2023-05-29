@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 export const Wrap = styled.div`
-  width: 360px;
-  height: 100vh;
+  width: 100%;
+  @media only screen and (min-width: 1000px) {
+    max-width: 360px;
+  }
+  height: calc(var(--vh, 1vh) * 100);
   position: absolute;
   top: 0;
   left: 50%;
@@ -12,7 +15,7 @@ export const Wrap = styled.div`
 
 export const Bg = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-color: ${(props) => props.theme.bgColor};
   display: flex;
   align-items: center;
@@ -227,7 +230,7 @@ export const MemberText = styled.div`
   font-size: 14px;
   font-family: ${(props) => props.theme.textFont};
   font-weight: lighter;
-  margin-left: 3px;
+  margin-left: 1%;
   padding-top: 10px;
   text-align: center;
   z-index: 1;

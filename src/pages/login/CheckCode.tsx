@@ -7,13 +7,16 @@ import { endCheck, codeCheck, restartCheckCode } from "../../util/api";
 import { useRef, useState, useEffect } from "react";
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   //background-color: ${(props) => props.theme.bgColor};
 `;
 const Wrap = styled.div`
-  width: 360px;
-  height: 100vh;
+  width: 100%;
+  @media only screen and (min-width: 1000px) {
+    max-width: 360px;
+  }
+  height: calc(var(--vh, 1vh) * 100);
   position: absolute;
   top: 0;
   left: 50%;
@@ -239,7 +242,7 @@ function CheckCode() {
                 cursor: "pointer",
               }}
               onClick={() => {
-                window.location.href = `/attendance/${state.id}`;
+                navigate(`/attendance/${state.id}`);
               }}
               onMouseEnter={() => {
                 btn.current.style.color = "#1C1F2A";

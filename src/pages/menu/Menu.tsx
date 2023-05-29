@@ -21,10 +21,25 @@ function Menu() {
       navigate("/checkattendance");
     } else {
       if (id > 0) {
-        window.location.href = `/attendance/${id}`;
+        navigate(`/attendance/${id}`);
       } else {
         alert("동아리를 먼저 검색해주세요.");
-        window.location.href = "/";
+        navigate("/");
+      }
+    }
+  };
+
+  const Linkto2 = async () => {
+    const response = await tokenValidate(localStorage.getItem("token"));
+    //console.log(response);
+    if (response) {
+      navigate("/moveto");
+    } else {
+      if (id > 0) {
+        navigate(`/annonymous/${id}`);
+      } else {
+        alert("동아리를 먼저 검색해주세요.");
+        navigate("/");
       }
     }
   };
@@ -53,16 +68,7 @@ function Menu() {
               </S.Icon>
               출석체크
             </S.Btn>
-            <S.Btn
-              onClick={() => {
-                if (id > 0) {
-                  window.location.href = `/anonymous/${id}`;
-                } else {
-                  alert("동아리를 먼저 검색해주세요.");
-                  window.location.href = "/";
-                }
-              }}
-            >
+            <S.Btn onClick={Linkto2}>
               <S.Icon>
                 <span
                   className="material-symbols-outlined"

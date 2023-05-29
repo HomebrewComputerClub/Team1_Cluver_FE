@@ -18,8 +18,10 @@ import {
 import * as S from "./Attendance.styled";
 import { useRecoilState } from "recoil";
 import { clubID } from "../../util/atoms";
+import { useNavigate } from "react-router-dom";
 
 function Attendance() {
+  const navigate = useNavigate();
   const params = useParams();
 
   let arr = [
@@ -306,7 +308,7 @@ function Attendance() {
                     success.current.style.opacity = "0";
                     success.current.style.zIndex = "-1";
                   }, 200);
-                  window.location.href = `/attendance/${params.clubID}`;
+                  navigate(`/attendance/${params.clubID}`);
                 } else {
                   setTimeout(() => {
                     success.current.style.opacity = "0";
@@ -387,7 +389,7 @@ function Attendance() {
                       <S.MemberDiv>
                         <S.MemberText
                           style={{
-                            marginLeft: "7px",
+                            marginLeft: "3%",
                             width: "50px",
                           }}
                         >

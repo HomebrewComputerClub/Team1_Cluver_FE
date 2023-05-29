@@ -11,13 +11,16 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   //background-color: ${(props) => props.theme.bgColor};
 `;
 const Wrap = styled.div`
-  width: 360px;
-  height: 100vh;
+  width: 100%;
+  @media only screen and (min-width: 1000px) {
+    max-width: 360px;
+  }
+  height: calc(var(--vh, 1vh) * 100);
   position: absolute;
   top: 0;
   left: 50%;
@@ -279,11 +282,7 @@ function Signup() {
             </Button>
           </Form>
         </Container>
-        <Bottombar
-          first={false}
-          second={false}
-          third={false}
-        />
+        <Bottombar first={false} second={false} third={false} />
       </Wrap>
     </Background>
   );

@@ -9,8 +9,10 @@ import { BASE_URL, searchName } from "../../util/api";
 import * as S from "./Main.styled";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { clubID } from "../../util/atoms";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
   const search = useRef<any>(null);
   const res = useRef<any>(null);
   const [word, setWord] = useState("");
@@ -109,7 +111,7 @@ function Main() {
                       <S.Res
                         onClick={() => {
                           if (e.status === "PUBLIC") {
-                            window.location.href = `/attendance/${e.id}`;
+                            navigate(`/attendance/${e.id}`);
                           } else {
                             priv.current.style.opacity = "1";
                             priv.current.style.zIndex = "10";
