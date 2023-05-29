@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import Bottombar from "../../components/Bottombar";
 import SimpleCard from "../../components/SimpleCard";
 import { useLocation, useNavigate } from "react-router";
-import { endCheck, codeCheck } from "../../util/api";
+import { endCheck, codeCheck, restartCheckCode } from "../../util/api";
 import { useRef, useState, useEffect } from "react";
 
 const Background = styled.div`
@@ -117,6 +117,8 @@ function CheckCode() {
   const { state } = useLocation() as IRouterState;
   const [status, setStatus] = useState("(진행 중)");
   const [message, setM] = useState("출석 마감하기");
+  const [message2, setM2] = useState("출석을 마감하시겠습니까?");
+  const [message3, setM3] = useState("마감하기");
   const btn = useRef<any>(null);
   let today = new Date();
   let year = today.getFullYear();
@@ -134,7 +136,22 @@ function CheckCode() {
       const code = response.data.checkCode;
       navigate("/admin");
     } else {
-      console.log(response);
+      //console.log(response);
+    }
+  };
+
+  const restart = async () => {
+    const today = new Date();
+    const response = await restartCheckCode(
+      today.getMonth() + 1,
+      today.getDate(),
+      state.id
+    );
+    if (response.status === 201) {
+      const code = response.data.checkCode;
+      navigate("/admin");
+    } else {
+      //console.log(response);
     }
   };
 
@@ -146,14 +163,19 @@ function CheckCode() {
       state.id,
       state.checkCode
     );
-    console.log(response);
+    //console.log(response);
     if (response === "출석체크 이미 끝났음") {
       setStatus("(마감)");
       setM("출석 진행하기");
+      setM2("출석을 진행하시겠습니까?");
+      setM3("진행하기");
     } else if (response === "출석 성공") {
       setStatus("(진행 중)");
       setM("출석 마감하기");
+      setM2("출석을 마감하시겠습니까?");
+      setM3("마감하기");
     }
+    return response;
   };
 
   useEffect(() => {
@@ -169,10 +191,20 @@ function CheckCode() {
         <Container>
           <ModalBg ref={modalRef}>
             <Modal>
-              <Text>출석을 마감하시겠습니까?</Text>
+              <Text>{message2}</Text>
               <TextWrapper>
-                <SmallText style={{ cursor: "pointer" }} onClick={onEndCheck}>
-                  마감하기
+                <SmallText
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    if (message3 === "진행하기") {
+                      console.log(1);
+                      restart();
+                    } else {
+                      onEndCheck();
+                    }
+                  }}
+                >
+                  {message3}
                 </SmallText>
                 <span>|</span>
                 <SmallText
@@ -232,13 +264,7 @@ function CheckCode() {
             </Text>
           </TextWrapper>
         </Container>
-        <Bottombar
-          first={false}
-          second={false}
-          third={false}
-          fourth={true}
-          fifth={false}
-        />
+        <Bottombar first={false} second={false} third={true} />
       </Wrap>
     </Background>
   );

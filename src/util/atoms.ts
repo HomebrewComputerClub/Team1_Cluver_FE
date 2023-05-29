@@ -27,3 +27,5 @@ export const manager = atom<IManager>({
   default: undefined,
   effects: [persistAtom],
 });
+
+export const clubID = atom({ key: "clubID", default: -1 });

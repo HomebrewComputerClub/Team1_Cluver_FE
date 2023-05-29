@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { BASE_URL, searchName } from "../../util/api";
 import * as S from "./Main.styled";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { clubID } from "../../util/atoms";
 
 function Main() {
   const search = useRef<any>(null);
@@ -184,13 +186,7 @@ function Main() {
               코드 확인
             </S.Btn>
           </S.InputDiv>
-          <Bottombar
-            first={false}
-            second={false}
-            third={false}
-            fourth={false}
-            fifth={true}
-          />
+          <Bottombar first={false} second={true} third={false} />
         </S.Bg>
       </S.Wrap>
     </>

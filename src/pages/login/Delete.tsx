@@ -249,13 +249,7 @@ function Delete() {
             선택 삭제
           </Button>
         </Container>
-        <Bottombar
-          first={false}
-          second={false}
-          third={false}
-          fourth={true}
-          fifth={false}
-        />
+        <Bottombar first={false} second={false} third={true} />
       </Wrap>
     </Background>
   );

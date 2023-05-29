@@ -283,8 +283,6 @@ function Signup() {
           first={false}
           second={false}
           third={false}
-          fourth={false}
-          fifth={false}
         />
       </Wrap>
     </Background>

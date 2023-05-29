@@ -5,7 +5,7 @@ import { tokenValidate } from "../util/api";
 
 const Container = styled.div`
   width: 100%;
-  height: 95px;
+  height: 90px;
   position: absolute;
   bottom: 0;
   margin: 0 auto;
@@ -19,14 +19,14 @@ const Container = styled.div`
 
 const IconDiv = styled.div`
   width: 100%;
-  height: 45px;
+  height: 40px;
   position: absolute;
   top: 3px;
   //background-color: rgba(50, 50, 50, 0.5);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding: 0 60px;
   align-content: center;
-  padding: 0 15px;
 `;
 
 const Icon = styled.span<{ isActive: boolean }>`
@@ -34,8 +34,8 @@ const Icon = styled.span<{ isActive: boolean }>`
   color: white;
   font-size: 30px;
   width: 45px;
-  background: ${(props) =>
-    props.isActive ? props.theme.gradient : props.theme.bgColor};
+  /* background: ${(props) =>
+    props.isActive ? props.theme.gradient : props.theme.bgColor}; */
   border-radius: 7px;
   text-align: center;
   font-family: ${(props) => props.theme.titleFont};
@@ -46,11 +46,11 @@ const TextDiv = styled.div`
   width: 100%;
   height: 15px;
   position: absolute;
-  bottom: 28px;
+  bottom: 30px;
   //background-color: green;
   display: flex;
-  justify-content: space-evenly;
-  padding: 0 15px;
+  justify-content: space-between;
+  padding: 0 60px;
 `;
 
 const Text = styled.span`
@@ -66,15 +66,13 @@ interface IBarProps {
   first: boolean;
   second: boolean;
   third: boolean;
-  fourth: boolean;
-  fifth: boolean;
 }
-function Bottombar({ first, second, third, fourth, fifth }: IBarProps) {
+function Bottombar({ first, second, third }: IBarProps) {
   const navigate = useNavigate();
 
   const LinktoAdmin = async () => {
     const response = await tokenValidate(localStorage.getItem("token"));
-    console.log(response);
+    //console.log(response);
     if (response) {
       navigate("/admin");
     } else {
@@ -82,14 +80,8 @@ function Bottombar({ first, second, third, fourth, fifth }: IBarProps) {
     }
   };
 
-  const LinktoAttendance = async () => {
-    const response = await tokenValidate(localStorage.getItem("token"));
-    console.log(response);
-    if (response) {
-      navigate("/checkattendance");
-    } else {
-      navigate("/");
-    }
+  const LinktoMenu = async () => {
+    navigate("/menu");
   };
 
   return (
@@ -111,44 +103,30 @@ function Bottombar({ first, second, third, fourth, fifth }: IBarProps) {
               </span>
             </Link>
           </Icon> */}
-          <Icon isActive={first} onClick={LinktoAttendance}>
+          <Icon isActive={first} onClick={LinktoMenu}>
             <span
               className="material-symbols-outlined"
               style={{
                 fontSize: "32px",
                 lineHeight: "140%",
-                paddingLeft: "2px",
+                paddingLeft: "0px",
                 fontVariationSettings: "'FILL' 1",
               }}
             >
-              how_to_reg
+              widgets
             </span>
           </Icon>
-          <Icon isActive={second}>
-            <span
-              className="material-symbols-outlined"
-              style={{
-                fontSize: "32px",
-                lineHeight: "140%",
-                fontVariationSettings: "'FILL' 1",
-              }}
-            >
-              schedule
-            </span>
+          <Icon
+            isActive={second}
+            style={{
+              fontSize: "28px",
+              lineHeight: "152%",
+              /* transform: "scaleY(-1)", */
+            }}
+          >
+            <Link to="/">♣</Link>
           </Icon>
-          <Icon isActive={third}>
-            <span
-              className="material-symbols-outlined"
-              style={{
-                fontSize: "32px",
-                lineHeight: "138%",
-                fontVariationSettings: "'FILL' 1",
-              }}
-            >
-              groups
-            </span>
-          </Icon>
-          <Icon isActive={fourth} onClick={LinktoAdmin}>
+          <Icon isActive={third} onClick={LinktoAdmin}>
             <span
               className="material-symbols-outlined"
               style={{
@@ -160,23 +138,11 @@ function Bottombar({ first, second, third, fourth, fifth }: IBarProps) {
               manage_accounts
             </span>
           </Icon>
-          <Icon
-            isActive={fifth}
-            style={{
-              fontSize: "28px",
-              lineHeight: "152%",
-              transform: "scaleY(-1)",
-            }}
-          >
-            <Link to="/">♣</Link>
-          </Icon>
         </IconDiv>
         <TextDiv>
-          <Text>출석체크</Text>
-          <Text>웬투밋</Text>
-          <Text>그룹관리</Text>
-          <Text>관리자</Text>
+          <Text style={{ paddingLeft: "1px" }}>메뉴</Text>
           <Text>홈으로</Text>
+          <Text>관리자</Text>
         </TextDiv>
       </Container>
     </>

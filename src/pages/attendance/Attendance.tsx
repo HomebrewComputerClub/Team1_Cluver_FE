@@ -16,6 +16,8 @@ import {
   getCalendar,
 } from "../../util/api";
 import * as S from "./Attendance.styled";
+import { useRecoilState } from "recoil";
+import { clubID } from "../../util/atoms";
 
 function Attendance() {
   const params = useParams();
@@ -51,6 +53,12 @@ function Attendance() {
   const [b, setArr2] = useState(arr);
   const [on, setOn] = useState(false);
   const [clubName, setClubName] = useState("");
+
+  const [ID, setID] = useRecoilState(clubID);
+
+  useEffect(() => {
+    setID(Number(params.clubID));
+  }, []);
 
   let N = 0;
 
@@ -371,6 +379,9 @@ function Attendance() {
                   let per = Math.round((ct / e.attendances.length) * 100);
                   let navDiv = [] as any;
                   navDiv[`${e.id}`] = 0;
+                  navDiv[`${e.id}`] = Math.floor(e.attendances.length / 5);
+                  //console.log(e);
+                  //console.log(Math.floor(e.attendances.length / 5));
                   return (
                     <li key={e.index}>
                       <S.MemberDiv>
@@ -427,53 +438,76 @@ function Attendance() {
                             ref={(ele) => {
                               clovers.current[`${e.id}`] = ele;
                             }}
-                            style={{ width: "fit-content" }}
+                            style={{
+                              width: "fit-content",
+                              transform: `translateX(-${
+                                Math.floor(e.attendances.length / 5) * 83.2
+                              }px)`,
+                            }}
                           >
-                            {e.attendances?.map((i: any) => {
-                              N += 1;
-                              div = N / 5;
-                              /* if (N % 5 !== 0) {
+                            {e.attendances
+                              ?.sort(function (a: any, b: any) {
+                                const dA = a.club_attendance.date;
+                                const dB = b.club_attendance.date;
+                                let arrA = dA.split("일");
+                                let arrB = dB.split("일");
+                                arrA = arrA[0];
+                                arrB = arrB[0];
+                                arrA = arrA.split("월");
+                                arrB = arrB.split("월");
+                                arrA = arrA[0] + arrA[1];
+                                arrB = arrB[0] + arrB[1];
+                                return Number(arrA) < Number(arrB)
+                                  ? -1
+                                  : Number(arrA) > Number(arrB)
+                                  ? 1
+                                  : 0;
+                              })
+                              .map((i: any) => {
+                                N += 1;
+                                div = N / 5;
+                                /* if (N % 5 !== 0) {
                               div += 1;
                             } */
-                              if (i.isChecked === true) {
-                                ct++;
-                                per = Math.round(
-                                  (ct / e.attendances.length) * 100
-                                );
-                                return (
-                                  <span
-                                    style={{
-                                      cursor: "pointer",
-                                      marginRight: "5px",
-                                      color: "#9ee69a",
-                                    }}
-                                    onClick={() => {
-                                      alert(`${i.club_attendance.date}`);
-                                    }}
-                                  >
-                                    ♣
-                                  </span>
-                                );
-                              } else {
-                                per = Math.round(
-                                  (ct / e.attendances.length) * 100
-                                );
-                                return (
-                                  <span
-                                    style={{
-                                      cursor: "pointer",
-                                      marginRight: "5px",
-                                      color: "grey",
-                                    }}
-                                    onClick={() => {
-                                      alert(`${i.club_attendance.date}`);
-                                    }}
-                                  >
-                                    ♣
-                                  </span>
-                                );
-                              }
-                            })}
+                                if (i.isChecked === true) {
+                                  ct++;
+                                  per = Math.round(
+                                    (ct / e.attendances.length) * 100
+                                  );
+                                  return (
+                                    <span
+                                      style={{
+                                        cursor: "pointer",
+                                        marginRight: "5px",
+                                        color: "#9ee69a",
+                                      }}
+                                      onClick={() => {
+                                        alert(`${i.club_attendance.date}`);
+                                      }}
+                                    >
+                                      ♣
+                                    </span>
+                                  );
+                                } else {
+                                  per = Math.round(
+                                    (ct / e.attendances.length) * 100
+                                  );
+                                  return (
+                                    <span
+                                      style={{
+                                        cursor: "pointer",
+                                        marginRight: "5px",
+                                        color: "grey",
+                                      }}
+                                      onClick={() => {
+                                        alert(`${i.club_attendance.date}`);
+                                      }}
+                                    >
+                                      ♣
+                                    </span>
+                                  );
+                                }
+                              })}
                           </div>
                         </S.MemberText>
                         <S.MemberText
@@ -655,13 +689,7 @@ function Attendance() {
               </S.attendances>
             </S.listDiv>
           </S.Section>
-          <Bottombar
-            first={true}
-            second={false}
-            third={false}
-            fourth={false}
-            fifth={false}
-          />
+          <Bottombar first={true} second={false} third={false} />
         </S.Bg>
       </S.Wrap>
     </>

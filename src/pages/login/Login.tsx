@@ -209,13 +209,7 @@ function Login() {
             </Text>
           </TextWrapper>
         </Container>
-        <Bottombar
-          first={false}
-          second={false}
-          third={false}
-          fourth={false}
-          fifth={false}
-        />
+        <Bottombar first={false} second={false} third={false} />
       </Wrap>
     </Background>
   );

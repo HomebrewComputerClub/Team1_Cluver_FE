@@ -20,7 +20,7 @@ export const Bg = styled.div`
 `;
 
 export const TalkDiv = styled.div`
-  height: calc(100vh - 175px);
+  height: calc(100vh - 165px);
   width: 100%;
   background: rgba(0, 0, 0, 0.3);
   position: absolute;
@@ -147,7 +147,7 @@ export const ChatDiv = styled.div`
   display: inline-block;
   color: white;
   width: fit-content;
-  max-width: 85%;
+  max-width: calc(360px * 0.8);
   height: auto resize;
   border: 1px solid transparent;
   font-size: 14px;

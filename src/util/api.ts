@@ -13,6 +13,7 @@ export async function loginValidate(id: string, password: string) {
     localStorage.setItem("token", token);
     return response;
   } catch (e: any) {
+    console.log(e);
     return e.response.data.message;
   }
 }
@@ -326,6 +327,24 @@ export async function signUp(
     console.log(response);
     return response;
   } catch (e: any) {
+    return e.response.data.message;
+  }
+}
+
+export async function restartCheckCode(
+  month: number,
+  day: number,
+  clubId: number
+) {
+  try {
+    const response = await axios.post(`${BASE_URL}/club-attendance/restart`, {
+      date: month + "월" + day + "일",
+      clubId: clubId,
+      activity: "정기회합",
+    });
+    return response;
+  } catch (e: any) {
+    console.log(e);
     return e.response.data.message;
   }
 }

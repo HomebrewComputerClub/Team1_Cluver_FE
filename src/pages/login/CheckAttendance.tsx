@@ -157,13 +157,7 @@ function CheckAttendance() {
             })}
           </CardContainer>
         </Container>
-        <Bottombar
-          first={true}
-          second={false}
-          third={false}
-          fourth={false}
-          fifth={false}
-        />
+        <Bottombar first={false} second={false} third={true} />
       </Wrap>
     </Background>
   );

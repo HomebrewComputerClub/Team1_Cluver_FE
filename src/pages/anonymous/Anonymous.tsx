@@ -10,29 +10,6 @@ import moment from "moment";
 import "moment/locale/ko";
 
 function Anonymous() {
-  let arr = [
-    { content: "개발개발", date: "2일 전" },
-    { content: "@@님 개발 열심히 하세요~~", date: "1일 전" },
-    { content: "빨간 날에도 회합을 하는 동아리가 있?다?", date: "12시간 전" },
-    { content: "개발", date: "10분 전" },
-    {
-      content:
-        "ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁ",
-      date: "9분 전",
-    },
-    { content: "홈", date: "7분 전" },
-    { content: "브", date: "7분 전" },
-    { content: "루", date: "7분 전" },
-    { content: ".", date: "5분 전" },
-    { content: ".", date: "5분 전" },
-    { content: ".", date: "5분 전" },
-    { content: ".", date: "4분 전" },
-    { content: ".", date: "4분 전" },
-    { content: ".", date: "3분 전" },
-    { content: ".", date: "2분 전" },
-    { content: ".", date: "1분 전" },
-  ];
-
   const params = useParams();
   let resAPI = [] as any;
   const [clubName, setClubName] = useState("");
@@ -80,6 +57,9 @@ function Anonymous() {
     e.preventDefault();
     write();
     setC("");
+    setTimeout(() => {
+      upCt(ct + 1);
+    }, 100);
   };
 
   useEffect(() => {
@@ -147,13 +127,7 @@ function Anonymous() {
               </S.InputDiv>
             </form>
           </S.TalkDiv>
-          <Bottombar
-            first={false}
-            second={true}
-            third={false}
-            fourth={false}
-            fifth={false}
-          />
+          <Bottombar first={true} second={false} third={false} />
         </S.Bg>
       </S.Wrap>
     </>
