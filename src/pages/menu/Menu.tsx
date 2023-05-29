@@ -36,7 +36,7 @@ function Menu() {
       navigate("/moveto");
     } else {
       if (id > 0) {
-        navigate(`/annonymous/${id}`);
+        navigate(`/anonymous/${id}`);
       } else {
         alert("동아리를 먼저 검색해주세요.");
         navigate("/");

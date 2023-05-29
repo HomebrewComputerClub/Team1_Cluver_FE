@@ -197,7 +197,7 @@ export const Division = styled.div`
 export const Section = styled.div`
   width: 100%;
   height: 370px;
-  height: calc(100vh - 380px);
+  height: calc((var(--vh, 1vh) * 100) - 380px);
   background: ${(props) => props.theme.boxColor};
   position: absolute;
   top: 260px;
@@ -234,6 +234,25 @@ export const MemberText = styled.div`
   padding-top: 10px;
   text-align: center;
   z-index: 1;
+`;
+
+export const C = styled.span`
+  cursor: pointer;
+  margin-right: 1.2px;
+  background: #9ee69a;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: left;
+  //border: "1px solid white",
+  width: 15px;
+  height: 15px;
+  margin: 1px;
+  display: inline-block;
+  @media only screen and (max-width: 800px) {
+    font-size: 12px;
+    padding-top: 2px;
+  }
 `;
 
 export const BarArea = styled.div`

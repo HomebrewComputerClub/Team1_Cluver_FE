@@ -229,7 +229,7 @@ function Attendance() {
                 fontVariationSettings: "'wght' 300",
                 position: "absolute",
                 top: "170px",
-                left: "225px",
+                left: "62%",
                 cursor: "pointer",
               }}
               onClick={async () => {
@@ -416,7 +416,7 @@ function Attendance() {
                                 navDiv[`${e.id}`] -= 1;
                               }
                               //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 83;
+                              let how = navDiv[`${e.id}`] * 84.5;
                               clovers.current[
                                 `${e.id}`
                               ].style.transform = `translateX(-${how}px)`;
@@ -427,7 +427,7 @@ function Attendance() {
                         </S.MemberText>
                         <S.MemberText
                           style={{
-                            width: "81.5px",
+                            width: "83px",
                             marginLeft: "0",
                             color: "grey",
                             fontFamily: "copperplate",
@@ -444,12 +444,17 @@ function Attendance() {
                               display: "flex",
                               width: "fit-content",
                               transform: `translateX(-${
-                                Math.floor(e.attendances.length / 5) * 83.2
+                                Math.floor(e.attendances.length / 5) * 84.5
                               }px)`,
                             }}
                           >
-                            {e.attendances
-                              ?.sort(function (a: any, b: any) {
+                            {e.attendances?.map((i: any) => {
+                              N += 1;
+                              div = N / 5;
+                              /* if (N % 5 !== 0) {
+                              div += 1;
+                            } */
+                              /* .sort(function (a: any, b: any) {
                                 const dA = a.club_attendance.date;
                                 const dB = b.club_attendance.date;
                                 let arrA = dA.split("일");
@@ -465,68 +470,36 @@ function Attendance() {
                                   : Number(arrA) > Number(arrB)
                                   ? 1
                                   : 0;
-                              })
-                              .map((i: any) => {
-                                N += 1;
-                                div = N / 5;
-                                /* if (N % 5 !== 0) {
-                              div += 1;
-                            } */
-                                if (i.isChecked === true) {
-                                  ct++;
-                                  per = Math.round(
-                                    (ct / e.attendances.length) * 100
-                                  );
-                                  return (
-                                    <span
-                                      style={{
-                                        cursor: "pointer",
-                                        marginRight: "5px",
-                                        background: "#9ee69a",
-                                        backgroundClip: "text",
-                                        WebkitBackgroundClip: "text",
-                                        color: "transparent",
-                                        textAlign: "left",
-                                        //border: "1px solid white",
-                                        width: "14.5px",
-                                        margin: "1px",
-                                        display: "inline-block",
-                                      }}
-                                      onClick={() => {
-                                        alert(`${i.club_attendance.date}`);
-                                      }}
-                                    >
-                                      ♣
-                                    </span>
-                                  );
-                                } else {
-                                  per = Math.round(
-                                    (ct / e.attendances.length) * 100
-                                  );
-                                  return (
-                                    <span
-                                      style={{
-                                        cursor: "pointer",
-                                        marginRight: "5px",
-                                        background: "grey",
-                                        backgroundClip: "text",
-                                        WebkitBackgroundClip: "text",
-                                        color: "transparent",
-                                        textAlign: "left",
-                                        //border: "1px solid white",
-                                        width: "14.5px",
-                                        margin: "1px",
-                                        display: "inline-block",
-                                      }}
-                                      onClick={() => {
-                                        alert(`${i.club_attendance.date}`);
-                                      }}
-                                    >
-                                      ♣
-                                    </span>
-                                  );
-                                }
-                              })}
+                              }) */
+                              if (i.isChecked === true) {
+                                ct++;
+                                per = Math.round(
+                                  (ct / e.attendances.length) * 100
+                                );
+                                return (
+                                  <S.C
+                                    onClick={() => {
+                                      alert(`${i.club_attendance.date}`);
+                                    }}
+                                  >
+                                    ♣
+                                  </S.C>
+                                );
+                              } else {
+                                per = Math.round(
+                                  (ct / e.attendances.length) * 100
+                                );
+                                return (
+                                  <S.C
+                                    onClick={() => {
+                                      alert(`${i.club_attendance.date}`);
+                                    }}
+                                  >
+                                    ♣
+                                  </S.C>
+                                );
+                              }
+                            })}
                           </div>
                         </S.MemberText>
                         <S.MemberText
@@ -548,7 +521,7 @@ function Attendance() {
                                 navDiv[`${e.id}`] += 1;
                               }
                               //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 83;
+                              let how = navDiv[`${e.id}`] * 83.5;
                               clovers.current[
                                 `${e.id}`
                               ].style.transform = `translateX(-${how}px)`;

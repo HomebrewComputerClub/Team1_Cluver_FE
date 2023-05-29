@@ -24,7 +24,7 @@ export const Bg = styled.div`
 
 export const Logo = styled.img`
   width: 180px;
-  margin-top: calc(var(--vh, 1vh) * 30);
+  margin-top: calc(var(--vh, 1vh) * 28);
 `;
 
 export const Text = styled.div`

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -37,15 +38,16 @@ const Leftdiv = styled.div`
   font-family: ${(props) => props.theme.titleFont};
   font-weight: bold;
   left: 25px;
-  margin-top: 20px;
+  margin-top: 15px;
   background: ${(props) => props.theme.gradient};
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   z-index: 10;
   cursor: pointer;
-  height: fit-content;
-  width: fit-content;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
 `;
 
 const MenuDiv = styled.div`
@@ -87,6 +89,7 @@ const DropMenu = styled.div`
 `;
 
 function Navbar() {
+  const navigate = useNavigate();
   const [n, setN] = useState(1);
   const menu = useRef<any>();
   const [text, setText] = useState("menu");
@@ -118,9 +121,13 @@ function Navbar() {
     <>
       <Container>
         <Leftdiv>♣</Leftdiv>
-        <Link to="/">
-          <Cluver>CLUVER</Cluver>
-        </Link>
+        <Cluver
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          CLUVER
+        </Cluver>
         <MenuDiv
           onClick={() => {
             setN(n + 1);
