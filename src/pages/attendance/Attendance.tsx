@@ -168,7 +168,7 @@ function Attendance() {
       birth
     );
     //console.log("docheck");
-    //console.log(response);
+    console.log(response);
   };
 
   const chCode = async () => {
@@ -205,13 +205,35 @@ function Attendance() {
               box.current[0] = e;
             }}
           >
-            <S.Code
-              type="text"
-              placeholder="CODE"
-              onChange={(e) => {
-                setCode(e.target.value);
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const res = await chCode();
+                if (res === 2) {
+                  setCh("done");
+                  success.current.style.opacity = "1";
+                  success.current.style.zIndex = "10";
+                } else {
+                  success.current.style.opacity = "0";
+                  success.current.style.zIndex = "-1";
+                  fail.current.style.opacity = "1";
+                  fail.current.style.zIndex = "10";
+                  setTimeout(() => {
+                    fail.current.style.opacity = "0";
+                    fail.current.style.zIndex = "-1";
+                  }, 1800);
+                }
               }}
-            ></S.Code>
+            >
+              <S.Code
+                inputMode="numeric"
+                type="text"
+                placeholder="CODE"
+                onChange={(e) => {
+                  setCode(e.target.value);
+                }}
+              ></S.Code>
+            </form>
             <span
               className="material-symbols-outlined"
               style={{
@@ -229,6 +251,8 @@ function Attendance() {
                   success.current.style.opacity = "1";
                   success.current.style.zIndex = "10";
                 } else {
+                  success.current.style.opacity = "0";
+                  success.current.style.zIndex = "-1";
                   fail.current.style.opacity = "1";
                   fail.current.style.zIndex = "10";
                   setTimeout(() => {
@@ -264,15 +288,40 @@ function Attendance() {
                 box.current[2] = e;
               }}
             >
-              <S.Input
-                type="text"
-                maxLength={4}
-                placeholder="생일 4자리"
-                onChange={(e) => {
-                  setBirth(e.target.value);
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (
+                    window.confirm(
+                      `[${name} ${birth}] 입력하신 정보가 맞습니까?`
+                    )
+                  ) {
+                    docheck();
+                    setTimeout(() => {
+                      success.current.style.opacity = "0";
+                      success.current.style.zIndex = "-1";
+                    }, 200);
+                    navigate(`/attendance/${params.clubID}`);
+                  } else {
+                    setTimeout(() => {
+                      success.current.style.opacity = "0";
+                      success.current.style.zIndex = "-1";
+                    }, 100);
+                  }
                 }}
-              ></S.Input>
+              >
+                <S.Input
+                  inputMode="numeric"
+                  type="text"
+                  maxLength={4}
+                  placeholder="생일 4자리"
+                  onChange={(e) => {
+                    setBirth(e.target.value);
+                  }}
+                ></S.Input>
+              </form>
             </S.InputBox>
+
             <S.Btn
               ref={(e) => {
                 box.current[3] = e;
@@ -293,7 +342,7 @@ function Attendance() {
                 if (
                   window.confirm(`[${name} ${birth}] 입력하신 정보가 맞습니까?`)
                 ) {
-                  doCheck(month, day, Number(params.clubID), name, birth);
+                  docheck();
                   setTimeout(() => {
                     success.current.style.opacity = "0";
                     success.current.style.zIndex = "-1";
@@ -327,6 +376,10 @@ function Attendance() {
               }}
               style={{ color: "#89EC84" }}
               onClick={() => {
+                success.current.style.opacity = "0";
+                success.current.style.zIndex = "-1";
+                fail.current.style.opacity = "0";
+                fail.current.style.zIndex = "-1";
                 or.current[0].style.color = "#89EC84";
                 or.current[1].style.color = "white";
                 or.current[2].style.opacity = "1";
@@ -344,6 +397,10 @@ function Attendance() {
                 or.current[1] = e;
               }}
               onClick={() => {
+                success.current.style.opacity = "0";
+                success.current.style.zIndex = "-1";
+                fail.current.style.opacity = "0";
+                fail.current.style.zIndex = "-1";
                 or.current[1].style.color = "#89EC84";
                 or.current[0].style.color = "white";
                 or.current[3].style.opacity = "1";

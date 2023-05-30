@@ -30,7 +30,7 @@ const Cluver = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  z-index: 10;
+  z-index: 22;
   cursor: pointer;
 `;
 
@@ -46,7 +46,7 @@ const Leftdiv = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  z-index: 10;
+  z-index: 22;
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -66,7 +66,7 @@ const MenuDiv = styled.div`
   -webkit-background-clip: text;
   color: transparent;
   cursor: pointer;
-  z-index: 10;
+  z-index: 22;
 `;
 
 const DropDiv = styled.div`
@@ -101,7 +101,7 @@ const BtnDiv = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: calc(var(--vh, 1vh) * 25);
+  margin-top: calc(var(--vh, 1vh) * 27);
   /* border: 1px solid white;
   padding: 7px 0;
   border-radius: 10px; */
@@ -192,17 +192,14 @@ function Navbar() {
       menu.current.style.opacity = "0";
       menu.current.style.zIndex = "-1";
       setText("menu");
-      clover.current.style.fontSize = "35px";
       setTimeout(() => {
         clover.current.style.opacity = "1";
       }, 15);
     } else {
       clover.current.style.opacity = "0";
       menu.current.style.opacity = "1";
-      menu.current.style.zIndex = "5";
+      menu.current.style.zIndex = "20";
       setText("close");
-      //clover.current.style.fontSize = "26px";
-      clover.current.style.fontSize = "35px";
       setTimeout(() => {
         clover.current.style.opacity = "1";
       }, 15);
