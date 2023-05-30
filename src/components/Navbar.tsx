@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { tokenValidate } from "../util/api";
+import { useRecoilValue } from "recoil";
+import { clubID } from "../util/atoms";
 
 const Container = styled.div`
   width: 100%;
@@ -89,11 +92,42 @@ const DropMenu = styled.div`
 `;
 
 function Navbar() {
+  const id = useRecoilValue(clubID);
   const navigate = useNavigate();
   const [n, setN] = useState(1);
   const menu = useRef<any>();
   const [text, setText] = useState("menu");
   const clover = useRef<any>();
+
+  const Linkto = async () => {
+    const response = await tokenValidate(localStorage.getItem("token"));
+    //console.log(response);
+    if (response) {
+      navigate("/checkattendance");
+    } else {
+      if (id > 0) {
+        navigate(`/attendance/${id}`);
+      } else {
+        alert("동아리를 먼저 검색해주세요.");
+        navigate("/");
+      }
+    }
+  };
+
+  const Linkto2 = async () => {
+    const response = await tokenValidate(localStorage.getItem("token"));
+    //console.log(response);
+    if (response) {
+      navigate("/moveto");
+    } else {
+      if (id > 0) {
+        navigate(`/anonymous/${id}`);
+      } else {
+        alert("동아리를 먼저 검색해주세요.");
+        navigate("/");
+      }
+    }
+  };
 
   useEffect(() => {
     if (n % 2 === 1) {
@@ -145,7 +179,7 @@ function Navbar() {
           </span>
         </MenuDiv>
         <DropDiv ref={menu}>
-          <DropMenu
+          {/* <DropMenu
             onClick={() => {
               setN(1);
             }}
@@ -153,42 +187,37 @@ function Navbar() {
             <Link to="/">
               <span style={{ cursor: "pointer" }}>서비스 이용 가이드</span>
             </Link>
+          </DropMenu> */}
+          <DropMenu onClick={Linkto}>
+            <span style={{ cursor: "pointer" }}>출석 체크</span>
           </DropMenu>
-          <DropMenu
-            onClick={() => {
-              setN(1);
-            }}
-          >
-            <Link to="/">
-              <span style={{ cursor: "pointer" }}>출석 체크</span>
-            </Link>
+          <DropMenu onClick={Linkto2}>
+            <span style={{ cursor: "pointer" }}>대나무숲</span>
           </DropMenu>
-          <DropMenu
-            onClick={() => {
-              setN(1);
-            }}
-          >
-            <span style={{ cursor: "pointer" }}>모임 시간 조율</span>
-          </DropMenu>
-          <DropMenu
-            onClick={() => {
-              setN(1);
-            }}
-          >
-            <span style={{ cursor: "pointer" }}>그룹 관리</span>
-          </DropMenu>
+
           {!!localStorage.getItem("token") ? (
-            <DropMenu
-              onClick={() => {
-                setN(1);
-                localStorage.removeItem("token");
-                localStorage.removeItem("manager");
-              }}
-            >
-              <Link to="/login">
-                <span style={{ cursor: "pointer" }}>로그아웃</span>
-              </Link>
-            </DropMenu>
+            <>
+              <DropMenu
+                onClick={() => {
+                  setN(1);
+                }}
+              >
+                <Link to="/admin">
+                  <span style={{ cursor: "pointer" }}>동아리 관리</span>
+                </Link>
+              </DropMenu>
+              <DropMenu
+                onClick={() => {
+                  setN(1);
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("manager");
+                }}
+              >
+                <Link to="/login">
+                  <span style={{ cursor: "pointer" }}>로그아웃</span>
+                </Link>
+              </DropMenu>
+            </>
           ) : (
             <>
               <DropMenu

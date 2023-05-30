@@ -479,6 +479,7 @@ function Attendance() {
                                 return (
                                   <S.C
                                     onClick={() => {
+                                      console.log(i);
                                       alert(`${i.club_attendance.date}`);
                                     }}
                                   >
@@ -490,13 +491,14 @@ function Attendance() {
                                   (ct / e.attendances.length) * 100
                                 );
                                 return (
-                                  <S.C
+                                  <S.C2
                                     onClick={() => {
+                                      console.log(i);
                                       alert(`${i.club_attendance.date}`);
                                     }}
                                   >
                                     ♣
-                                  </S.C>
+                                  </S.C2>
                                 );
                               }
                             })}

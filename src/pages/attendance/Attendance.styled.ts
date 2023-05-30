@@ -255,6 +255,25 @@ export const C = styled.span`
   }
 `;
 
+export const C2 = styled.span`
+  cursor: pointer;
+  margin-right: 1.2px;
+  background: grey;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: left;
+  //border: "1px solid white",
+  width: 15px;
+  height: 15px;
+  margin: 1px;
+  display: inline-block;
+  @media only screen and (max-width: 800px) {
+    font-size: 12px;
+    padding-top: 2px;
+  }
+`;
+
 export const BarArea = styled.div`
   width: 45px;
   height: 4px;

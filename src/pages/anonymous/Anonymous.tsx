@@ -10,6 +10,12 @@ import moment from "moment";
 import "moment/locale/ko";
 
 function Anonymous() {
+  const detectMobileKeyboard = () => {
+    if (document.activeElement?.tagName === "INPUT") {
+    } else {
+    }
+  };
+  window.addEventListener("resize", detectMobileKeyboard);
   const params = useParams();
   let resAPI = [] as any;
   const [clubName, setClubName] = useState("");

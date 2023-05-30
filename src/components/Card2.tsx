@@ -201,7 +201,7 @@ function Card2({ id, name, desc, img, isPrivate, code }: IProps) {
       today.getDate(),
       id
     );
-    console.log(response);
+    //console.log(response);
     if (response.data?.isValid === false) {
       //출석코드 마감
       //checkCodeRef.current.style.color = "#6a5f5f";

@@ -74,7 +74,7 @@ export async function getCheckCode(month: number, day: number, clubId: number) {
       date: month + "월" + day + "일",
       clubId: clubId,
     });
-    console.log(response);
+    //console.log(response);
     return response;
   } catch (e: any) {
     console.log(e);
