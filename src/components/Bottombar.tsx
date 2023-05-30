@@ -90,23 +90,8 @@ function Bottombar({ first, second, third }: IBarProps) {
 
   return (
     <>
-      <Container>
+      {/* <Container>
         <IconDiv>
-          {/* <Icon isActive={first}>
-            <Link to="/">
-              <span
-                className="material-symbols-outlined"
-                style={{
-                  fontSize: "32px",
-                  lineHeight: "140%",
-                  paddingLeft: "2px",
-                  fontVariationSettings: "'FILL' 1",
-                }}
-              >
-                how_to_reg
-              </span>
-            </Link>
-          </Icon> */}
           <Icon isActive={first} onClick={LinktoMenu}>
             <span
               className="material-symbols-outlined"
@@ -125,7 +110,6 @@ function Bottombar({ first, second, third }: IBarProps) {
             style={{
               fontSize: "28px",
               lineHeight: "152%",
-              /* transform: "scaleY(-1)", */
             }}
             onClick={() => {
               navigate("/");
@@ -151,7 +135,7 @@ function Bottombar({ first, second, third }: IBarProps) {
           <Text>홈으로</Text>
           <Text>관리자</Text>
         </TextDiv>
-      </Container>
+      </Container> */}
     </>
   );
 }

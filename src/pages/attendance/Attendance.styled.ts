@@ -197,7 +197,7 @@ export const Division = styled.div`
 export const Section = styled.div`
   width: 100%;
   height: 370px;
-  height: calc((var(--vh, 1vh) * 100) - 380px);
+  height: calc((var(--vh, 1vh) * 100) - 260px);
   background: ${(props) => props.theme.boxColor};
   position: absolute;
   top: 260px;

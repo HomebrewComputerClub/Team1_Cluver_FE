@@ -141,13 +141,12 @@ function Attendance() {
       //const url = "http://172.20.10.4:8000/club/" + params.userID;
       const response = await axios.get(url);
       resAPI = response.data;
-      console.log(resAPI);
-      setClubName(resAPI.name);
-      setArr(resAPI.users);
       if (resAPI.users) {
-        setF(1);
+        console.log(resAPI);
+        setClubName(resAPI.name);
+        setArr(resAPI.users);
       } else {
-        console.log("2");
+        setF(1);
       }
     } catch (err) {
       console.log(err);
@@ -156,15 +155,6 @@ function Attendance() {
 
   useEffect(() => {
     Api();
-    setArr(resAPI.users);
-    setClubName(resAPI.name);
-    if (a.length > 0) {
-      a.forEach((e) => {
-        console.log(e.attendances);
-      });
-    } else {
-      console.log("yet");
-    }
   }, [flag]);
 
   const month = moment().format("M");

@@ -23,7 +23,7 @@ const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 `;
 const DescWrapper = styled.div`
   display: flex;
@@ -43,6 +43,7 @@ const Icon = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  margin: auto;
 `;
 const Logo = styled.img`
   width: 30px;
@@ -59,7 +60,7 @@ const Title = styled.span`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 `;
 const Desc = styled.span`
   width: 100%;
@@ -80,6 +81,7 @@ const Desc = styled.span`
   font-weight: lighter;
   font-family: ${(props) => props.theme.textFont};
   color: ${(props) => props.theme.iconColor};
+  margin-bottom: 1px;
 `;
 const TextWrapper = styled.div`
   width: 100%;

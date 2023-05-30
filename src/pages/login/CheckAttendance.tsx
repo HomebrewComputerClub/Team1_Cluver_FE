@@ -86,7 +86,7 @@ const Text = styled.div`
   }
 `;
 const CardContainer = styled.div`
-  width: 96%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,7 +99,6 @@ const CardContainer = styled.div`
     width: 7px;
   }
   ::-webkit-scrollbar-track {
-    background: ${(props) => props.theme.boxColor};
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb {

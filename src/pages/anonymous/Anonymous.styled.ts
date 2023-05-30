@@ -25,6 +25,7 @@ export const Bg = styled.div`
 export const TalkDiv = styled.div`
   height: calc(100vh - 165px);
   height: calc((var(--vh, 1vh) * 100) - 165px);
+  height: calc((var(--vh, 1vh) * 100) - 65px);
   width: 100%;
   background: rgba(0, 0, 0, 0.3);
   position: absolute;

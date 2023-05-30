@@ -67,7 +67,7 @@ const Title = styled.span`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 `;
 const Desc = styled.span`
   width: 100%;

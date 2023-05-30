@@ -24,6 +24,11 @@ function Main() {
   const priv = useRef<any>(null);
   const [key, setKey] = useState("");
   const [id, setId] = useState(0);
+  const [ID, setID] = useRecoilState(clubID);
+
+  useEffect(() => {
+    setID(0);
+  }, []);
 
   useEffect(() => {
     if (word === "") {
