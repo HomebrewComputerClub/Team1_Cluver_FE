@@ -4,6 +4,7 @@ import { createCheckCode, getCheckCode, tokenValidate } from "../util/api";
 import { useEffect, useRef } from "react";
 const Container = styled.div`
   width: 100%;
+  height: fit-content;
   margin-bottom: 15px;
   border: 1px solid white;
   border-radius: 15px;
@@ -25,17 +26,19 @@ const Container = styled.div`
 const Bg = styled.div`
   width: 100%;
   padding: 18px;
+  height: fit-content;
 `;
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   //margin-bottom: 8px;
 `;
 const DescWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
+  margin: 0 10px;
+  width: 70%;
+  height: fit-content;
 `;
 const Icon = styled.div`
   width: 30px;
@@ -48,6 +51,7 @@ const Icon = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  margin: auto;
 `;
 const Logo = styled.img`
   width: 30px;
@@ -66,28 +70,26 @@ const Title = styled.span`
   margin-bottom: 3px;
 `;
 const Desc = styled.span`
+  width: 100%;
+  max-height: 25px;
+  overflow-y: scroll;
+  word-break: break-all;
+  white-space: pre-wrap;
+  padding-right: 2px;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 5px;
+    background-clip: padding-box;
+  }
   font-size: 12px;
   font-weight: lighter;
   font-family: ${(props) => props.theme.textFont};
   color: ${(props) => props.theme.iconColor};
 `;
-const TextWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  & {
-    color: ${(props) => props.theme.iconColor};
-    font-size: 11px;
-  }
-`;
-const Text = styled.div`
-  :hover {
-    color: ${(props) => props.theme.accentColor};
-    transition: all ease 0.3s;
-    cursor: pointer;
-  }
-`;
+
 interface IProps {
   id: number;
   name: string;
@@ -214,21 +216,16 @@ function Card2({ id, name, desc, img, isPrivate, code }: IProps) {
     <Container>
       <Bg>
         <TitleWrapper>
-          <TitleWrapper>
-            <Icon>
-              <Logo ref={imgRef} src={img} onError={handleImgError} />
-              <span
-                ref={iconRef}
-                style={{ lineHeight: "160%", display: "none" }}
-              >
-                ♣
-              </span>
-            </Icon>
-            <DescWrapper>
-              <Title>{name}</Title>
-              <Desc>{desc}</Desc>
-            </DescWrapper>
-          </TitleWrapper>
+          <Icon>
+            <Logo ref={imgRef} src={img} onError={handleImgError} />
+            <span ref={iconRef} style={{ lineHeight: "160%", display: "none" }}>
+              ♣
+            </span>
+          </Icon>
+          <DescWrapper>
+            <Title>{name}</Title>
+            <Desc>{desc}</Desc>
+          </DescWrapper>
           <span
             className="material-symbols-outlined"
             style={{

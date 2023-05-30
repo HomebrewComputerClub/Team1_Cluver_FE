@@ -94,6 +94,7 @@ const CardContainer = styled.div`
   max-height: 50%;
   overflow-y: scroll;
   margin: 10px auto;
+  overflow-x: hidden;
   ::-webkit-scrollbar {
     width: 7px;
   }

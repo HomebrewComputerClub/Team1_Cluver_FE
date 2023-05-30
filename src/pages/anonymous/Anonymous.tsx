@@ -54,12 +54,17 @@ function Anonymous() {
   };
 
   const onSubmit = (e: any) => {
-    e.preventDefault();
-    write();
-    setC("");
-    setTimeout(() => {
-      upCt(ct + 1);
-    }, 100);
+    console.log(content);
+    if (content !== "") {
+      e.preventDefault();
+      write();
+      setC("");
+      setTimeout(() => {
+        upCt(ct + 1);
+      }, 100);
+    } else {
+      alert("메시지를 입력하세요.");
+    }
   };
 
   useEffect(() => {

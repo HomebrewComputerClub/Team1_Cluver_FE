@@ -28,7 +28,9 @@ const TitleWrapper = styled.div`
 const DescWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
+  margin: 0 10px;
+  width: 70%;
+  height: fit-content;
 `;
 const Icon = styled.div`
   width: 30px;
@@ -47,6 +49,7 @@ const Logo = styled.img`
   height: 30px;
   transform: translateY(-5%) translateX(-2%);
   object-fit: contain;
+  margin: auto;
 `;
 const Title = styled.span`
   font-size: 14px;
@@ -59,6 +62,20 @@ const Title = styled.span`
   margin-bottom: 3px;
 `;
 const Desc = styled.span`
+  width: 100%;
+  max-height: 25px;
+  overflow-y: scroll;
+  word-break: break-all;
+  white-space: pre-wrap;
+  padding-right: 2px;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 5px;
+    background-clip: padding-box;
+  }
   font-size: 12px;
   font-weight: lighter;
   font-family: ${(props) => props.theme.textFont};
@@ -207,24 +224,22 @@ function Card({ id, name, desc, img, isPrivate, code }: IProps) {
     <Container>
       <Bg>
         <TitleWrapper>
-          <TitleWrapper>
-            <Icon>
-              <Logo ref={imgRef} src={img} onError={handleImgError} />
-              <span
-                ref={iconRef}
-                style={{
-                  lineHeight: "160%",
-                  display: "none",
-                }}
-              >
-                ♣
-              </span>
-            </Icon>
-            <DescWrapper>
-              <Title>{name}</Title>
-              <Desc>{desc}</Desc>
-            </DescWrapper>
-          </TitleWrapper>
+          <Icon>
+            <Logo ref={imgRef} src={img} onError={handleImgError} />
+            <span
+              ref={iconRef}
+              style={{
+                lineHeight: "160%",
+                display: "none",
+              }}
+            >
+              ♣
+            </span>
+          </Icon>
+          <DescWrapper>
+            <Title>{name}</Title>
+            <Desc>{desc}</Desc>
+          </DescWrapper>
           <span
             className="material-symbols-outlined"
             style={{

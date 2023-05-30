@@ -149,9 +149,11 @@ export const ListDiv = styled.div`
 
 export const ChatDiv = styled.div`
   display: inline-block;
+  word-break: break-all;
+  white-space: pre-wrap;
   color: white;
   width: fit-content;
-  max-width: calc(100vw * 0.8);
+  max-width: 80%;
   height: auto resize;
   border: 1px solid transparent;
   font-size: 14px;
