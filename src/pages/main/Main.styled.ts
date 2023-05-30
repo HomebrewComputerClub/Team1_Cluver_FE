@@ -136,6 +136,10 @@ export const ResText = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 3px;
+  margin-right: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ResName = styled.div`
