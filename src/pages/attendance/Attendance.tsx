@@ -138,7 +138,7 @@ function Attendance() {
         setClubName(resAPI.name);
         setArr(resAPI.users);
       } else {
-        setF(1);
+        setF(flag + 1);
       }
     } catch (err) {
       console.log(err);

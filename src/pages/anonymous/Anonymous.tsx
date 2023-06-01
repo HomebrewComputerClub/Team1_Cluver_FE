@@ -76,7 +76,6 @@ function Anonymous() {
 
   useEffect(() => {
     Api();
-    setClubName(resAPI.name);
     read();
     scrollToBottom();
   }, [ct]);
