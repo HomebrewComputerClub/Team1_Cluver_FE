@@ -4,11 +4,16 @@ import axios from "axios";
 // 허락없이 추가한 것에 심심한 양해의 말씀을..
 function Test() {
   const SERVER_URL = "cluver.kr:8000";
+  //   const SERVER_URL = "localhost:8000";
 
   const login = async () => {
     const response = await axios({
       method: "post",
-      url: `http://${SERVER_URL}/auth/test`,
+      url: `http://${SERVER_URL}/auth/signin`,
+      data: {
+        id: "root1",
+        password: "1234",
+      },
       withCredentials: true,
     });
     console.log(response);
