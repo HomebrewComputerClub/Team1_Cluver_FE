@@ -13,6 +13,7 @@ import CheckAttendance from "../../pages/login/CheckAttendance";
 import Anonymous from "../../pages/anonymous/Anonymous";
 import Menu from "./../../pages/menu/Menu";
 import MoveTo from "./../../pages/login/MoveTo";
+import Test from "../../pages/test/test";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
         <Route index path="/attendance/:clubID" element={<Attendance />} />
         <Route index path="/anonymous/:clubID" element={<Anonymous />} />
         <Route index path="/menu" element={<Menu />} />
+        <Route index path="/test" element={<Test />} />
 
         {/* 로그아웃 시 접속 가능한 페이지 */}
         <Route element={<PrivateRoute authentication={false} />}>
