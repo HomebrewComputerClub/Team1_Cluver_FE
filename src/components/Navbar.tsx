@@ -304,7 +304,8 @@ function Navbar() {
                 <Btn
                   onClick={() => {
                     setN(n + 1);
-                    localStorage.removeItem("token");
+                    // 여기
+                    // localStorage.removeItem("token");
                     localStorage.removeItem("manager");
                     navigate("/login");
                   }}
