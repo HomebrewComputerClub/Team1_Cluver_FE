@@ -71,6 +71,7 @@ function Anonymous() {
     } else {
       alert("메시지를 입력하세요.");
     }
+    upCt(ct + 1);
   };
 
   useEffect(() => {

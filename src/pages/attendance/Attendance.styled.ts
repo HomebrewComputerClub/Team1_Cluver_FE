@@ -249,13 +249,16 @@ export const C = styled.span`
   height: 15px;
   margin: 1px;
   display: inline-block;
+  font-size: 14px;
+  font-family: "Noto Sans KR", sans-serif;
   @media only screen and (max-width: 800px) {
-    font-size: 12px;
-    padding-top: 2px;
+    font-size: 14px;
+    //padding-top: 2px;
   }
 `;
 
 export const C2 = styled.span`
+  font-family: "Noto Sans KR", sans-serif;
   cursor: pointer;
   margin-right: 1.2px;
   background: grey;
@@ -268,9 +271,10 @@ export const C2 = styled.span`
   height: 15px;
   margin: 1px;
   display: inline-block;
+  font-size: 14px;
   @media only screen and (max-width: 800px) {
-    font-size: 12px;
-    padding-top: 2px;
+    font-size: 14px;
+    //padding-top: 2px;
   }
 `;
 

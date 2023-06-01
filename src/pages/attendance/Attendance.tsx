@@ -68,14 +68,6 @@ function Attendance() {
   const today = moment().format("YYYY-MM-DD");
 
   useEffect(() => {
-    /* if (on) {
-      or.current[3].style.zIndex = "0";
-    } else {
-      pick.current.style.zIndex = "-3";
-    } */
-  }, [on]);
-
-  useEffect(() => {
     if (code !== key) {
       setCh("login");
     }
@@ -169,6 +161,7 @@ function Attendance() {
     );
     //console.log("docheck");
     console.log(response);
+    Api();
   };
 
   const chCode = async () => {
@@ -425,7 +418,8 @@ function Attendance() {
                   N = 0;
                   let div = 1;
                   let ct = 0;
-                  let per = Math.round((ct / e.attendances.length) * 100);
+                  //let per = Math.round((ct / e.attendances.length) * 100);
+                  let per = 0;
                   let navDiv = [] as any;
                   navDiv[`${e.id}`] = 0;
                   navDiv[`${e.id}`] = Math.floor(e.attendances.length / 5);
@@ -463,7 +457,7 @@ function Attendance() {
                                 navDiv[`${e.id}`] -= 1;
                               }
                               //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 84.5;
+                              let how = navDiv[`${e.id}`] * 84.7;
                               clovers.current[
                                 `${e.id}`
                               ].style.transform = `translateX(-${how}px)`;
@@ -491,7 +485,7 @@ function Attendance() {
                               display: "flex",
                               width: "fit-content",
                               transform: `translateX(-${
-                                Math.floor(e.attendances.length / 5) * 84.5
+                                Math.floor(e.attendances.length / 5) * 84.7
                               }px)`,
                             }}
                           >
@@ -570,7 +564,7 @@ function Attendance() {
                                 navDiv[`${e.id}`] += 1;
                               }
                               //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 83.5;
+                              let how = navDiv[`${e.id}`] * 84.7;
                               clovers.current[
                                 `${e.id}`
                               ].style.transform = `translateX(-${how}px)`;
