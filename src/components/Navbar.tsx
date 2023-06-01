@@ -209,7 +209,7 @@ function Navbar() {
           src={cluver}
           alt=""
           onClick={() => {
-            setN(n + 1);
+            //setN(n + 1);
             navigate("/");
           }}
         ></Cluver>
