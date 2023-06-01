@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = `http://cluver.kr:8000`;
+export const BASE_URL = `http://localhost:8000`;
 // export const BASE_URL = `http://localhost:8000`;
 
 export async function loginValidate(id: string, password: string) {
@@ -9,15 +9,16 @@ export async function loginValidate(id: string, password: string) {
       id: id,
       password: password,
     });
-    // console.log(response);
-    // const token = response.data.accessToken;
-    // localStorage.setItem("token", token);
+    console.log(response);
+    const token = response.data.accessToken;
+    localStorage.setItem("token", token);
     return response;
   } catch (e: any) {
     console.log(e);
     return e.response.data.message;
   }
 }
+
 export async function getClubs(token: string | null) {
   try {
     const response = await axios.get(`${BASE_URL}/club/my`, {
@@ -30,33 +31,13 @@ export async function getClubs(token: string | null) {
   }
 }
 
-// export async function tokenValidate(token: string | null) {
-//   try {
-//     const response = await axios.get(`${BASE_URL}/auth/check`, {
-//       headers: { Authorization: `Bearer ${token}` },
-//     });
-//     if (response.status === 401) {
-//       localStorage.removeItem("token");
-//       localStorage.removeItem("manager");
-//       window.location.reload();
-//     }
-//     return response.data;
-//   } catch (e: any) {
-//     console.log("error: ", e);
-//     return false;
-//   }
-// }
-
 export async function tokenValidate(token: string | null) {
   try {
-    const response = await axios({
-      method: "get",
-      url: `http://${BASE_URL}/auth/check`,
-      withCredentials: true,
+    const response = await axios.get(`${BASE_URL}/auth/check`, {
+      // headers: { Authorization: `Bearer ${token}` },
     });
     if (response.status === 401) {
-      // 여기
-      // localStorage.removeItem("token");
+      localStorage.removeItem("token");
       localStorage.removeItem("manager");
       window.location.reload();
     }
@@ -94,7 +75,7 @@ export async function getCheckCode(month: number, day: number, clubId: number) {
       date: month + "월" + day + "일",
       clubId: clubId,
     });
-    //console.log(response);
+    console.log(response);
     return response;
   } catch (e: any) {
     console.log(e);
