@@ -17,7 +17,7 @@ const Background = styled.div`
 const Wrap = styled.div`
   width: 100%;
   @media only screen and (min-width: 1000px) {
-    max-width: 400px;
+    max-width: 360px;
   }
   height: calc(var(--vh, 1vh) * 100);
   position: absolute;

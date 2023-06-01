@@ -116,7 +116,8 @@ export const ResImg = styled.div`
   text-align: center;
   font-size: 16px;
   line-height: 170%;
-  font-family: ${(props) => props.theme.titleFont};
+  //font-family: ${(props) => props.theme.titleFont};
+  font-family: "Noto Sans KR", sans-serif;
   margin: 5px;
   margin-top: 8px;
   background: white;

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { tokenValidate } from "../util/api";
 import { useRecoilValue } from "recoil";
 import { clubID } from "../util/atoms";
+import cluver from "../assets/images/cluver.png";
 
 const Container = styled.div`
   width: 100%;
@@ -17,28 +18,22 @@ const Container = styled.div`
   vertical-align: middle;
 `;
 
-const Cluver = styled.div`
-  width: fit-content;
+const Cluver = styled.img`
   position: absolute;
-  font-size: 28px;
-  font-family: ${(props) => props.theme.titleFont};
-  font-weight: bold;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 20px;
-  background: ${(props) => props.theme.gradient};
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  top: 23px;
   z-index: 22;
   cursor: pointer;
+  width: 125px;
 `;
 
 const Leftdiv = styled.div`
   width: fit-content;
   position: absolute;
   font-size: 25px;
-  font-family: ${(props) => props.theme.titleFont};
+  //font-family: ${(props) => props.theme.titleFont};
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: bold;
   left: 25px;
   margin-top: 15px;
@@ -57,7 +52,7 @@ const MenuDiv = styled.div`
   width: fit-content;
   position: absolute;
   font-size: 25px;
-  font-family: ${(props) => props.theme.titleFont};
+  font-family: ${(props) => props.theme.textFont};
   font-weight: bold;
   right: 25px;
   margin-top: 17.5px;
@@ -211,13 +206,13 @@ function Navbar() {
       <Container>
         <Leftdiv>♣</Leftdiv>
         <Cluver
+          src={cluver}
+          alt=""
           onClick={() => {
-            setN(n + 1);
+            //setN(n + 1);
             navigate("/");
           }}
-        >
-          CLUVER
-        </Cluver>
+        ></Cluver>
         <MenuDiv
           onClick={() => {
             setN(n + 1);
