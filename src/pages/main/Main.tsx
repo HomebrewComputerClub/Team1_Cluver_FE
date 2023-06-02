@@ -10,6 +10,7 @@ import * as S from "./Main.styled";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { clubID } from "../../util/atoms";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 function Main() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function Main() {
   const [key, setKey] = useState("");
   const [id, setId] = useState(0);
   const [ID, setID] = useRecoilState(clubID);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setID(0);
@@ -63,8 +65,10 @@ function Main() {
   };
 
   const searchClub = async () => {
+    setLoading(true);
     const response = await searchName(word);
     setArr(response);
+    setLoading(false);
     //console.log(response);
   };
 
@@ -104,48 +108,52 @@ function Main() {
             </S.SearchIcon>
           </S.SearchBox>
           <S.ResDiv ref={res}>
-            <ul>
-              {a &&
-                a?.map((e: any) => {
-                  let lock = "lock";
-                  if (e.status === "PUBLIC") {
-                    lock = "lock_open_right";
-                  }
-                  return (
-                    <li key={e.id}>
-                      <S.Res
-                        onClick={() => {
-                          if (e.status === "PUBLIC") {
-                            navigate(`/attendance/${e.id}`);
-                          } else {
-                            priv.current.style.opacity = "1";
-                            priv.current.style.zIndex = "10";
-                            setKey(e.club_code);
-                            setId(e.id);
-                          }
-                        }}
-                      >
-                        <S.ResImg>♣</S.ResImg>
-                        <S.ResText>
-                          <S.ResName>{e.name}</S.ResName>
-                          <S.ResAbout>{e.description}</S.ResAbout>
-                        </S.ResText>
-                        <S.ResLock>
-                          <span
-                            className="material-symbols-outlined"
-                            style={{
-                              fontSize: "15px",
-                              fontVariationSettings: "'FILL' 1",
-                            }}
-                          >
-                            {lock}
-                          </span>
-                        </S.ResLock>
-                      </S.Res>
-                    </li>
-                  );
-                })}
-            </ul>
+            {loading ? (
+              <Loading />
+            ) : (
+              <ul>
+                {a &&
+                  a?.map((e: any) => {
+                    let lock = "lock";
+                    if (e.status === "PUBLIC") {
+                      lock = "lock_open_right";
+                    }
+                    return (
+                      <li key={e.id}>
+                        <S.Res
+                          onClick={() => {
+                            if (e.status === "PUBLIC") {
+                              navigate(`/attendance/${e.id}`);
+                            } else {
+                              priv.current.style.opacity = "1";
+                              priv.current.style.zIndex = "10";
+                              setKey(e.club_code);
+                              setId(e.id);
+                            }
+                          }}
+                        >
+                          <S.ResImg>♣</S.ResImg>
+                          <S.ResText>
+                            <S.ResName>{e.name}</S.ResName>
+                            <S.ResAbout>{e.description}</S.ResAbout>
+                          </S.ResText>
+                          <S.ResLock>
+                            <span
+                              className="material-symbols-outlined"
+                              style={{
+                                fontSize: "15px",
+                                fontVariationSettings: "'FILL' 1",
+                              }}
+                            >
+                              {lock}
+                            </span>
+                          </S.ResLock>
+                        </S.Res>
+                      </li>
+                    );
+                  })}
+              </ul>
+            )}
           </S.ResDiv>
           <S.InputDiv ref={priv}>
             <S.InputText>동아리 코드를 입력해주세요.</S.InputText>

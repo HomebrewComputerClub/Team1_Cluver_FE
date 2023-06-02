@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div<{ isActive: boolean }>`
   width: 70%;
@@ -83,11 +84,14 @@ interface IProps {
 }
 function SimpleCard({ id, name, desc, isPrivate, chosen }: IProps) {
   const navigate = useNavigate();
+  const location = useLocation();
   return (
     <Container
       isActive={chosen}
       onClick={() => {
-        navigate(`/attendance/${id}`);
+        if (location.pathname === "/checkcode") {
+          navigate(`/attendance/${id}`);
+        }
       }}
     >
       <Bg>

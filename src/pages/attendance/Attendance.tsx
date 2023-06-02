@@ -19,6 +19,7 @@ import * as S from "./Attendance.styled";
 import { useRecoilState } from "recoil";
 import { clubID } from "../../util/atoms";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 function Attendance() {
   const navigate = useNavigate();
@@ -55,6 +56,8 @@ function Attendance() {
   const [b, setArr2] = useState(arr);
   const [on, setOn] = useState(false);
   const [clubName, setClubName] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
 
   const [ID, setID] = useRecoilState(clubID);
 
@@ -102,9 +105,11 @@ function Attendance() {
   };
 
   const getUsers = async (m: string, d: string) => {
+    setLoading2(true);
     const response = await getCalendar(m, d, Number(params.clubID));
     //console.log(response);
     setArr2(response);
+    setLoading2(false);
   };
 
   useEffect(() => {
@@ -128,12 +133,14 @@ function Attendance() {
   }); */
 
   const Api = async () => {
+    setLoading(true);
     try {
       const url = BASE_URL + "/club/" + params.clubID;
       //const url = "http://172.20.10.4:8000/club/" + params.userID;
       const response = await axios.get(url);
       resAPI = response.data;
       if (resAPI.users) {
+        setLoading(false);
         console.log(resAPI);
         setClubName(resAPI.name);
         setArr(resAPI.users);
@@ -412,184 +419,163 @@ function Attendance() {
             }}
             style={{ opacity: "1", zIndex: "3" }}
           >
-            <ul>
-              {a &&
-                a?.map((e: any) => {
-                  N = 0;
-                  let div = 1;
-                  let ct = 0;
-                  //let per = Math.round((ct / e.attendances.length) * 100);
-                  let per = 0;
-                  let navDiv = [] as any;
-                  navDiv[`${e.id}`] = 0;
-                  navDiv[`${e.id}`] = Math.floor(e.attendances.length / 5);
-                  //console.log(e);
-                  //console.log(Math.floor(e.attendances.length / 5));
-                  return (
-                    <li key={e.index}>
-                      <S.MemberDiv>
-                        <S.MemberText
-                          style={{
-                            marginLeft: "3%",
-                            width: "50px",
-                          }}
-                        >
-                          {e.user_name}
-                        </S.MemberText>
-                        <S.MemberText style={{ marginRight: "5px" }}>
-                          {e.code}
-                        </S.MemberText>
-                        <S.MemberText
-                          style={{
-                            width: "21px",
-                            zIndex: "3",
-                          }}
-                        >
-                          <span
-                            className="material-symbols-outlined"
+            {loading ? (
+              <Loading />
+            ) : (
+              <ul>
+                {a &&
+                  a?.map((e: any) => {
+                    N = 0;
+                    let div = 1;
+                    let ct = 0;
+                    let per = 0;
+                    let navDiv = [] as any;
+                    navDiv[`${e.id}`] = 0;
+                    navDiv[`${e.id}`] = Math.floor(e.attendances.length / 5);
+                    return (
+                      <li key={e.index}>
+                        <S.MemberDiv>
+                          <S.MemberText
                             style={{
-                              fontSize: "22px",
-                              lineHeight: "12px",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              if (navDiv[`${e.id}`] > 0) {
-                                navDiv[`${e.id}`] -= 1;
-                              }
-                              //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 84.7;
-                              clovers.current[
-                                `${e.id}`
-                              ].style.transform = `translateX(-${how}px)`;
+                              marginLeft: "3%",
+                              width: "50px",
                             }}
                           >
-                            navigate_before
-                          </span>
-                        </S.MemberText>
-                        <S.MemberText
-                          style={{
-                            width: "83px",
-                            marginLeft: "0",
-                            color: "grey",
-                            fontFamily: "copperplate",
-                            fontSize: "17px",
-                            paddingTop: "7px",
-                            overflow: "hidden",
-                          }}
-                        >
-                          <div
-                            ref={(ele) => {
-                              clovers.current[`${e.id}`] = ele;
-                            }}
+                            {e.user_name}
+                          </S.MemberText>
+                          <S.MemberText style={{ marginRight: "5px" }}>
+                            {e.code}
+                          </S.MemberText>
+                          <S.MemberText
                             style={{
-                              display: "flex",
-                              width: "fit-content",
-                              transform: `translateX(-${
-                                Math.floor(e.attendances.length / 5) * 84.7
-                              }px)`,
+                              width: "21px",
+                              zIndex: "3",
                             }}
                           >
-                            {e.attendances?.map((i: any) => {
-                              N += 1;
-                              div = N / 5;
-                              /* if (N % 5 !== 0) {
-                              div += 1;
-                            } */
-                              /* .sort(function (a: any, b: any) {
-                                const dA = a.club_attendance.date;
-                                const dB = b.club_attendance.date;
-                                let arrA = dA.split("일");
-                                let arrB = dB.split("일");
-                                arrA = arrA[0];
-                                arrB = arrB[0];
-                                arrA = arrA.split("월");
-                                arrB = arrB.split("월");
-                                arrA = arrA[0] + arrA[1];
-                                arrB = arrB[0] + arrB[1];
-                                return Number(arrA) < Number(arrB)
-                                  ? -1
-                                  : Number(arrA) > Number(arrB)
-                                  ? 1
-                                  : 0;
-                              }) */
-                              if (i.isChecked === true) {
-                                ct++;
-                                per = Math.round(
-                                  (ct / e.attendances.length) * 100
-                                );
-                                return (
-                                  <S.C
-                                    onClick={() => {
-                                      console.log(i);
-                                      alert(`${i.club_attendance.date}`);
-                                    }}
-                                  >
-                                    ♣
-                                  </S.C>
-                                );
-                              } else {
-                                per = Math.round(
-                                  (ct / e.attendances.length) * 100
-                                );
-                                return (
-                                  <S.C2
-                                    onClick={() => {
-                                      console.log(i);
-                                      alert(`${i.club_attendance.date}`);
-                                    }}
-                                  >
-                                    ♣
-                                  </S.C2>
-                                );
-                              }
-                            })}
-                          </div>
-                        </S.MemberText>
-                        <S.MemberText
-                          style={{
-                            width: "18px",
-                            marginLeft: "0",
-                            marginRight: "10px",
-                          }}
-                        >
-                          <span
-                            className="material-symbols-outlined"
-                            style={{
-                              fontSize: "22px",
-                              lineHeight: "12px",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              if (navDiv[`${e.id}`] < div - 1) {
-                                navDiv[`${e.id}`] += 1;
-                              }
-                              //console.log(navDiv[`${e.id}`]);
-                              let how = navDiv[`${e.id}`] * 84.7;
-                              clovers.current[
-                                `${e.id}`
-                              ].style.transform = `translateX(-${how}px)`;
-                            }}
-                          >
-                            navigate_next
-                          </span>
-                        </S.MemberText>
-                        <S.MemberText style={{ width: "50px" }}>
-                          <S.BarArea>
-                            <S.Bar
+                            <span
+                              className="material-symbols-outlined"
                               style={{
-                                width: `${per}%`,
+                                fontSize: "22px",
+                                lineHeight: "12px",
+                                cursor: "pointer",
                               }}
-                            ></S.Bar>
-                          </S.BarArea>
-                        </S.MemberText>
-                        <S.MemberText style={{ textAlign: "right" }}>
-                          {per} %
-                        </S.MemberText>
-                      </S.MemberDiv>
-                    </li>
-                  );
-                })}
-            </ul>
+                              onClick={() => {
+                                if (navDiv[`${e.id}`] > 0) {
+                                  navDiv[`${e.id}`] -= 1;
+                                }
+                                let how = navDiv[`${e.id}`] * 84.7;
+                                clovers.current[
+                                  `${e.id}`
+                                ].style.transform = `translateX(-${how}px)`;
+                              }}
+                            >
+                              navigate_before
+                            </span>
+                          </S.MemberText>
+                          <S.MemberText
+                            style={{
+                              width: "83px",
+                              marginLeft: "0",
+                              color: "grey",
+                              fontFamily: "copperplate",
+                              fontSize: "17px",
+                              paddingTop: "7px",
+                              overflow: "hidden",
+                            }}
+                          >
+                            <div
+                              ref={(ele) => {
+                                clovers.current[`${e.id}`] = ele;
+                              }}
+                              style={{
+                                display: "flex",
+                                width: "fit-content",
+                                transform: `translateX(-${
+                                  Math.floor(e.attendances.length / 5) * 84.7
+                                }px)`,
+                              }}
+                            >
+                              {e.attendances?.map((i: any) => {
+                                N += 1;
+                                div = N / 5;
+                                if (i.isChecked === true) {
+                                  ct++;
+                                  per = Math.round(
+                                    (ct / e.attendances.length) * 100
+                                  );
+                                  return (
+                                    <S.C
+                                      onClick={() => {
+                                        console.log(i);
+                                        alert(`${i.club_attendance.date}`);
+                                      }}
+                                    >
+                                      ♣
+                                    </S.C>
+                                  );
+                                } else {
+                                  per = Math.round(
+                                    (ct / e.attendances.length) * 100
+                                  );
+                                  return (
+                                    <S.C2
+                                      onClick={() => {
+                                        console.log(i);
+                                        alert(`${i.club_attendance.date}`);
+                                      }}
+                                    >
+                                      ♣
+                                    </S.C2>
+                                  );
+                                }
+                              })}
+                            </div>
+                          </S.MemberText>
+                          <S.MemberText
+                            style={{
+                              width: "18px",
+                              marginLeft: "0",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <span
+                              className="material-symbols-outlined"
+                              style={{
+                                fontSize: "22px",
+                                lineHeight: "12px",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                if (navDiv[`${e.id}`] < div - 1) {
+                                  navDiv[`${e.id}`] += 1;
+                                }
+                                let how = navDiv[`${e.id}`] * 84.7;
+                                clovers.current[
+                                  `${e.id}`
+                                ].style.transform = `translateX(-${how}px)`;
+                              }}
+                            >
+                              navigate_next
+                            </span>
+                          </S.MemberText>
+                          <S.MemberText style={{ width: "50px" }}>
+                            <S.BarArea>
+                              <S.Bar
+                                style={{
+                                  width: `${per}%`,
+                                }}
+                              ></S.Bar>
+                            </S.BarArea>
+                          </S.MemberText>
+                          <S.MemberText style={{ textAlign: "right" }}>
+                            {per} %
+                          </S.MemberText>
+                        </S.MemberDiv>
+                      </li>
+                    );
+                  })}
+              </ul>
+            )}
           </S.Section>
           <S.Section
             ref={(e) => {
@@ -681,46 +667,58 @@ function Attendance() {
                 X
               </S.ListClose>
               <S.attendances>
-                <ul>
-                  {b &&
-                    b?.map((e: any) => {
-                      let text = "결석";
-                      if (e.isChecked) {
-                        text = "출석";
-                      }
-                      return (
-                        <li key={e.index}>
-                          <S.ListMembers>
-                            <S.ListMembersText
-                              style={{
-                                marginLeft: "15px",
-                                marginRight: "15px",
-                                width: "50px",
-                              }}
-                            >
-                              {e.name}
-                            </S.ListMembersText>
-                            <S.ListMembersText style={{ marginRight: "30px" }}>
-                              {e.code}
-                            </S.ListMembersText>
-                            {text === "출석" ? (
+                {loading2 ? (
+                  <Loading />
+                ) : (
+                  <ul>
+                    {b &&
+                      b?.map((e: any) => {
+                        let text = "결석";
+                        if (e.isChecked) {
+                          text = "출석";
+                        }
+                        return (
+                          <li key={e.index}>
+                            <S.ListMembers>
                               <S.ListMembersText
-                                style={{ marginRight: "0px", color: "#89EC84" }}
+                                style={{
+                                  marginLeft: "15px",
+                                  marginRight: "15px",
+                                  width: "50px",
+                                }}
                               >
-                                {text}
+                                {e.name}
                               </S.ListMembersText>
-                            ) : (
                               <S.ListMembersText
-                                style={{ marginRight: "0px", color: "#e34848" }}
+                                style={{ marginRight: "30px" }}
                               >
-                                {text}
+                                {e.code}
                               </S.ListMembersText>
-                            )}
-                          </S.ListMembers>
-                        </li>
-                      );
-                    })}
-                </ul>
+                              {text === "출석" ? (
+                                <S.ListMembersText
+                                  style={{
+                                    marginRight: "0px",
+                                    color: "#89EC84",
+                                  }}
+                                >
+                                  {text}
+                                </S.ListMembersText>
+                              ) : (
+                                <S.ListMembersText
+                                  style={{
+                                    marginRight: "0px",
+                                    color: "#e34848",
+                                  }}
+                                >
+                                  {text}
+                                </S.ListMembersText>
+                              )}
+                            </S.ListMembers>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                )}
               </S.attendances>
             </S.listDiv>
           </S.Section>
