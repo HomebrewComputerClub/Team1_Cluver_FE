@@ -227,6 +227,7 @@ function CheckCode() {
           <Title>출석 코드 {status}</Title>
           <CodeText>{state.checkCode}</CodeText>
           <SimpleCard
+            id={state.id}
             name={state.name}
             desc={state.desc}
             isPrivate={state.isPrivate}

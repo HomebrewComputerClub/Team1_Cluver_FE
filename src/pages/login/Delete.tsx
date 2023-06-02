@@ -239,6 +239,7 @@ function Delete() {
               <CardContainer onClick={() => onChoose(club.id)}>
                 <CheckBox isActive={chosen[club.id]} />
                 <SimpleCard
+                  id={club.id}
                   key={club.id}
                   name={club.name.toUpperCase()}
                   desc={club.description}

@@ -177,7 +177,7 @@ function Login() {
             })}
           </CardContainer>
           <AddButton onClick={onAddClub}>관리 중인 동아리 추가하기 +</AddButton>
-          {clubs.length == 0 ? (
+          {clubs.length === 0 ? (
             <></>
           ) : (
             <TextWrapper style={{ position: "absolute", bottom: "20px" }}>

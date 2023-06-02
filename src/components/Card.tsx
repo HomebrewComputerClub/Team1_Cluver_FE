@@ -99,6 +99,8 @@ const Text = styled.div`
     transition: all ease 0.3s;
     cursor: pointer;
   }
+  padding: 3px 10px;
+  border-radius: 5px;
 `;
 interface IProps {
   id: number;
@@ -223,7 +225,14 @@ function Card({ id, name, desc, img, isPrivate, code }: IProps) {
     checkCodeIsValid();
   }, []);
   return (
-    <Container>
+    <Container
+    /* onClick={() => {
+        checkCodeRef.current.style.border = "1px solid white";
+        setTimeout(() => {
+          checkCodeRef.current.style.border = "none";
+        }, 100);
+      }} */
+    >
       <Bg>
         <TitleWrapper>
           <Icon>

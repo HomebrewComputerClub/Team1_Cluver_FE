@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div<{ isActive: boolean }>`
-  width: 80%;
+  width: 70%;
   border: ${(props) => (props.isActive ? "4px" : "1px")} solid transparent;
   border-radius: 15px;
   background-origin: border-box;
@@ -25,11 +26,14 @@ const TitleWrapper = styled.div`
 const DescWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
+  margin: 0 10px;
+  width: 70%;
+  height: fit-content;
 `;
 const Icon = styled.div`
   width: 30px;
   height: 30px;
+  aspect-ratio: 1;
   border: 1px solid white;
   border-radius: 50%;
   color: white;
@@ -50,20 +54,42 @@ const Title = styled.span`
   margin-bottom: 2px;
 `;
 const Desc = styled.span`
+  width: 100%;
+  max-height: 25px;
+  overflow-y: scroll;
+  word-break: break-all;
+  white-space: pre-wrap;
+  padding-right: 2px;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 5px;
+    background-clip: padding-box;
+  }
   font-size: 12px;
   font-weight: lighter;
   font-family: ${(props) => props.theme.textFont};
   color: ${(props) => props.theme.iconColor};
+  margin-bottom: 1px;
 `;
 interface IProps {
+  id: number;
   name: string;
   desc: string;
   isPrivate: boolean;
   chosen: boolean;
 }
-function SimpleCard({ name, desc, isPrivate, chosen }: IProps) {
+function SimpleCard({ id, name, desc, isPrivate, chosen }: IProps) {
+  const navigate = useNavigate();
   return (
-    <Container isActive={chosen}>
+    <Container
+      isActive={chosen}
+      onClick={() => {
+        navigate(`/attendance/${id}`);
+      }}
+    >
       <Bg>
         <TitleWrapper>
           <TitleWrapper>
