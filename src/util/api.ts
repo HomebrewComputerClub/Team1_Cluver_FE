@@ -34,7 +34,7 @@ export async function getClubs(token: string | null) {
 export async function tokenValidate(token: string | null) {
   try {
     const response = await axios.get(`${BASE_URL}/auth/check`, {
-      // headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
     });
     if (response.status === 401) {
       localStorage.removeItem("token");
