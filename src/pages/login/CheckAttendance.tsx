@@ -7,6 +7,7 @@ import { getClubs, tokenValidate } from "../../util/api";
 import { useRecoilValue } from "recoil";
 import { IClub, manager } from "../../util/atoms";
 import { useEffect, useState } from "react";
+import Loading from "../../components/Loading";
 
 const Background = styled.div`
   width: 100%;
@@ -113,12 +114,15 @@ function CheckAttendance() {
   const navigate = useNavigate();
   const data = useRecoilValue(manager);
   const [clubs, setClubs] = useState<IClub[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const getClubsData = async () => {
+    setLoading(true);
     const response = await getClubs(localStorage.getItem("token"));
     if (response) {
       console.log(response);
       setClubs(response);
+      setLoading(false);
     } else {
       navigate("/login");
       console.log(response);
@@ -133,42 +137,47 @@ function CheckAttendance() {
       <Wrap>
         <Navbar></Navbar>
         <Container>
-          <div style={{ marginBottom: "10px" }}>
-            {clubs.length === 0 ? (
-              <>
-                <UserName>{data.name}</UserName>
-                <Title> 님이 관리 중인 동아리가 없습니다.</Title>
-              </>
-            ) : (
-              <Title>출석 확인할 동아리를 선택하세요.</Title>
-            )}
-          </div>
-
-          <CardContainer>
-            {clubs.map((club: any) => {
-              if (club)
-                return (
-                  <Link
-                    to={`/attendance/${club.id}`}
-                    style={{
-                      width: "75%",
-                      height: "100%",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    <Card2
-                      key={club.id}
-                      id={club.id}
-                      name={club.name.toUpperCase()}
-                      desc={club.description}
-                      img={club.img}
-                      isPrivate={club.status === "PRIVATE" ? true : false}
-                      code={club.club_code}
-                    ></Card2>
-                  </Link>
-                );
-            })}
-          </CardContainer>
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <div style={{ marginBottom: "10px" }}>
+                {clubs.length === 0 ? (
+                  <>
+                    <UserName>{data.name}</UserName>
+                    <Title> 님이 관리 중인 동아리가 없습니다.</Title>
+                  </>
+                ) : (
+                  <Title>출석 확인할 동아리를 선택하세요.</Title>
+                )}
+              </div>
+              <CardContainer>
+                {clubs.map((club: any) => {
+                  if (club)
+                    return (
+                      <Link
+                        to={`/attendance/${club.id}`}
+                        style={{
+                          width: "75%",
+                          height: "100%",
+                          marginBottom: "15px",
+                        }}
+                      >
+                        <Card2
+                          key={club.id}
+                          id={club.id}
+                          name={club.name.toUpperCase()}
+                          desc={club.description}
+                          img={club.img}
+                          isPrivate={club.status === "PRIVATE" ? true : false}
+                          code={club.club_code}
+                        ></Card2>
+                      </Link>
+                    );
+                })}
+              </CardContainer>
+            </>
+          )}
         </Container>
         <Bottombar first={false} second={false} third={true} />
       </Wrap>

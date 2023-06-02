@@ -10,6 +10,7 @@ const Background = styled.div`
   width: 100%;
   height: calc(var(--vh, 1vh) * 100);
   //background-color: ${(props) => props.theme.bgColor};
+  overflow: hidden;
 `;
 const Wrap = styled.div`
   width: 100%;
@@ -26,13 +27,13 @@ const Wrap = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  height: 77%;
-  transform: translateY(10%);
-  //background-color: red;
+  height: 92%;
+  /* background-color: red; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  padding-top: 19%;
   padding-bottom: 30px;
 `;
 const Title = styled.span`
@@ -79,7 +80,7 @@ const Text = styled.div`
 const ModalBg = styled.div`
   display: none; //flex
   width: 100%;
-  height: 100%;
+  height: 90%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 10;
   position: fixed;
@@ -221,7 +222,7 @@ function CheckCode() {
               </TextWrapper>
             </Modal>
           </ModalBg>
-          <Title>
+          <Title style={{ marginTop: "40%" }}>
             {year}-{month}-{day}
           </Title>
           <Title>출석 코드 {status}</Title>
@@ -258,7 +259,7 @@ function CheckCode() {
               출석 명단 확인
             </Text>
           </TextWrapper>
-          <TextWrapper style={{ position: "absolute", bottom: "10px" }}>
+          <TextWrapper style={{ position: "absolute", bottom: "60px" }}>
             <Text
               onClick={() => {
                 modalRef.current.style.display = "flex";

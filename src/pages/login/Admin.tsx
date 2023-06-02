@@ -7,6 +7,7 @@ import { getClubs, tokenValidate } from "../../util/api";
 import { useRecoilValue } from "recoil";
 import { IClub, manager } from "../../util/atoms";
 import { useEffect, useState } from "react";
+import Loading from "../../components/Loading";
 
 const Background = styled.div`
   width: 100%;
@@ -114,6 +115,7 @@ function Login() {
   const navigate = useNavigate();
   const data = useRecoilValue(manager);
   const [clubs, setClubs] = useState<IClub[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const onAddClub = async () => {
     const response = await tokenValidate(localStorage.getItem("token"));
@@ -134,10 +136,12 @@ function Login() {
     }
   };
   const getClubsData = async () => {
+    setLoading(true);
     const response = await getClubs(localStorage.getItem("token"));
     if (response) {
       console.log(response);
       setClubs(response);
+      setLoading(false);
     } else {
       navigate("/login");
       console.log(response);
@@ -152,30 +156,37 @@ function Login() {
       <Wrap>
         <Navbar></Navbar>
         <Container>
-          <div style={{ marginBottom: "10px" }}>
-            <UserName>{data.name}</UserName>
-            {clubs.length == 0 ? (
-              <Title> 님이 관리 중인 동아리가 없습니다.</Title>
-            ) : (
-              <Title> 님이 관리 중인 동아리입니다.</Title>
-            )}
-          </div>
-          <CardContainer>
-            {clubs.map((club: any) => {
-              if (club)
-                return (
-                  <Card
-                    key={club.id}
-                    id={club.id}
-                    name={club.name.toUpperCase()}
-                    desc={club.description}
-                    img={club.img}
-                    isPrivate={club.status == "PRIVATE" ? true : false}
-                    code={club.club_code}
-                  />
-                );
-            })}
-          </CardContainer>
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <div style={{ marginBottom: "10px" }}>
+                <UserName>{data.name}</UserName>
+                {clubs.length == 0 ? (
+                  <Title> 님이 관리 중인 동아리가 없습니다.</Title>
+                ) : (
+                  <Title> 님이 관리 중인 동아리입니다.</Title>
+                )}
+              </div>
+              <CardContainer>
+                {clubs.map((club: any) => {
+                  if (club)
+                    return (
+                      <Card
+                        key={club.id}
+                        id={club.id}
+                        name={club.name.toUpperCase()}
+                        desc={club.description}
+                        img={club.img}
+                        isPrivate={club.status == "PRIVATE" ? true : false}
+                        code={club.club_code}
+                      />
+                    );
+                })}
+              </CardContainer>
+            </>
+          )}
+
           <AddButton onClick={onAddClub}>관리 중인 동아리 추가하기 +</AddButton>
           {clubs.length === 0 ? (
             <></>
