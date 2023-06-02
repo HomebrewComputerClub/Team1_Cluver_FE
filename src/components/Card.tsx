@@ -15,15 +15,27 @@ const Container = styled.div`
     ),
     ${(props) => props.theme.gradient};
 `;
+const GradientLine = styled.div`
+  padding: 1px;
+  height: 35px;
+  border-width: 1.5px;
+  border-style: solid;
+  border-image: ${(props) => props.theme.gradient};
+  border-image-slice: 1;
+  border-top: none;
+  border-right: none;
+`;
 const Bg = styled.div`
   width: 100%;
-  padding: 18px;
+  /* padding: 18px; */
 `;
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  padding: 18px;
+  padding-bottom: 0px;
 `;
 const DescWrapper = styled.div`
   display: flex;
@@ -87,7 +99,7 @@ const TextWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   & {
     color: ${(props) => props.theme.iconColor};
     font-size: 11px;
@@ -99,7 +111,7 @@ const Text = styled.div`
     transition: all ease 0.3s;
     cursor: pointer;
   }
-  padding: 3px 10px;
+  padding: 12px 10px;
   border-radius: 5px;
 `;
 interface IProps {
@@ -262,11 +274,13 @@ function Card({ id, name, desc, img, isPrivate, code }: IProps) {
             {isPrivate ? "lock" : "lock_open_right"}
           </span>
         </TitleWrapper>
+        <GradientLine style={{ borderLeft: "none", height: "18px" }} />
         <TextWrapper>
           <Text ref={checkCodeRef} onClick={onCreateCode}>
             오늘의 출석 코드
           </Text>
-          <span>|</span>
+          {/* <span>|</span> */}
+          <GradientLine style={{ borderBottom: "none" }} />
           <Text onClick={onEdit}>동아리 정보</Text>
         </TextWrapper>
       </Bg>
