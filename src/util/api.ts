@@ -51,7 +51,8 @@ export async function tokenValidate(token: string | null) {
 export async function createCheckCode(
   month: number,
   day: number,
-  clubId: number
+  clubId: number,
+  activity: string | null
 ) {
   try {
     const response = await axios.post(
@@ -59,7 +60,7 @@ export async function createCheckCode(
       {
         date: month + "월" + day + "일",
         clubId: clubId,
-        activity: "정기회합",
+        activity: activity,
       }
     );
     return response;

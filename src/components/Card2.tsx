@@ -131,10 +131,12 @@ function Card2({ id, name, desc, img, isPrivate, code }: IProps) {
         //출석코드 생성 안 됨
         const ch = window.confirm("출석 코드를 생성하시겠습니까?");
         if (ch) {
+          let activity = window.prompt("회합명을 입력하세요", "정기회합");
           const response3 = await createCheckCode(
             today.getMonth() + 1,
             today.getDate(),
-            id
+            id,
+            activity
           );
           if (response3.status === 201) {
             const code = response3.data.checkCode;

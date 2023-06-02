@@ -184,16 +184,17 @@ function Login() {
                     );
                 })}
               </CardContainer>
+              <AddButton onClick={onAddClub}>
+                관리 중인 동아리 추가하기 +
+              </AddButton>
+              {clubs.length === 0 ? (
+                <></>
+              ) : (
+                <TextWrapper style={{ position: "absolute", bottom: "20px" }}>
+                  <Text onClick={onDeleteClub}>동아리 삭제하기</Text>
+                </TextWrapper>
+              )}
             </>
-          )}
-
-          <AddButton onClick={onAddClub}>관리 중인 동아리 추가하기 +</AddButton>
-          {clubs.length === 0 ? (
-            <></>
-          ) : (
-            <TextWrapper style={{ position: "absolute", bottom: "20px" }}>
-              <Text onClick={onDeleteClub}>동아리 삭제하기</Text>
-            </TextWrapper>
           )}
         </Container>
         <Bottombar first={false} second={false} third={true} />
