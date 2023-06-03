@@ -163,7 +163,7 @@ function Attendance() {
       month,
       day,
       Number(params.clubID),
-      name,
+      name.replace(/(\s*)/g, ""),
       birth
     );
     //console.log("docheck");
@@ -229,41 +229,43 @@ function Attendance() {
                 inputMode="numeric"
                 type="text"
                 placeholder="CODE"
+                pattern="[0-9]+"
                 onChange={(e) => {
                   setCode(e.target.value);
                 }}
               ></S.Code>
+
+              <span
+                className="material-symbols-outlined"
+                style={{
+                  color: "white",
+                  fontVariationSettings: "'wght' 300",
+                  position: "absolute",
+                  top: "170px",
+                  left: "62%",
+                  cursor: "pointer",
+                }}
+                onClick={async () => {
+                  const res = await chCode();
+                  if (res === 2) {
+                    setCh("done");
+                    success.current.style.opacity = "1";
+                    success.current.style.zIndex = "10";
+                  } else {
+                    success.current.style.opacity = "0";
+                    success.current.style.zIndex = "-1";
+                    fail.current.style.opacity = "1";
+                    fail.current.style.zIndex = "10";
+                    setTimeout(() => {
+                      fail.current.style.opacity = "0";
+                      fail.current.style.zIndex = "-1";
+                    }, 1800);
+                  }
+                }}
+              >
+                {ch}
+              </span>
             </form>
-            <span
-              className="material-symbols-outlined"
-              style={{
-                color: "white",
-                fontVariationSettings: "'wght' 300",
-                position: "absolute",
-                top: "170px",
-                left: "62%",
-                cursor: "pointer",
-              }}
-              onClick={async () => {
-                const res = await chCode();
-                if (res === 2) {
-                  setCh("done");
-                  success.current.style.opacity = "1";
-                  success.current.style.zIndex = "10";
-                } else {
-                  success.current.style.opacity = "0";
-                  success.current.style.zIndex = "-1";
-                  fail.current.style.opacity = "1";
-                  fail.current.style.zIndex = "10";
-                  setTimeout(() => {
-                    fail.current.style.opacity = "0";
-                    fail.current.style.zIndex = "-1";
-                  }, 1800);
-                }
-              }}
-            >
-              {ch}
-            </span>
           </S.CodeBox>
           <S.InputDiv ref={success}>
             <S.InputText>
@@ -279,7 +281,7 @@ function Attendance() {
                 type="text"
                 placeholder="이름"
                 onChange={(e) => {
-                  setName(e.target.value);
+                  setName(e.target.value.replace(/(\s*)/g, ""));
                 }}
               ></S.Input>
             </S.InputBox>
@@ -291,6 +293,62 @@ function Attendance() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  if (name === "" || birth.length !== 4) {
+                    alert("형식에 맞춰 입력해주세요.");
+                  } else {
+                    if (
+                      window.confirm(
+                        `[${name} ${birth}] 입력하신 정보가 맞습니까?`
+                      )
+                    ) {
+                      docheck();
+                      setTimeout(() => {
+                        success.current.style.opacity = "0";
+                        success.current.style.zIndex = "-1";
+                      }, 200);
+                      navigate(`/attendance/${params.clubID}`);
+                    } else {
+                      setTimeout(() => {
+                        success.current.style.opacity = "0";
+                        success.current.style.zIndex = "-1";
+                      }, 100);
+                    }
+                  }
+                }}
+              >
+                <S.Input
+                  inputMode="numeric"
+                  type="text"
+                  minLength={4}
+                  maxLength={4}
+                  placeholder="생일 4자리"
+                  pattern="[0-9]+"
+                  onChange={(e) => {
+                    setBirth(e.target.value);
+                  }}
+                ></S.Input>
+              </form>
+            </S.InputBox>
+            <S.Btn
+              ref={(e) => {
+                box.current[3] = e;
+              }}
+              onMouseEnter={() => {
+                if (name !== "" && birth !== "") {
+                  box.current[3].style.background =
+                    "linear-gradient(135deg, #89ec84 0%, #abc0e4 55%, #abc0e4 83%, #c7d5ed 100%)";
+                } else {
+                  box.current[3].style.background = "white";
+                }
+              }}
+              onMouseLeave={() => {
+                box.current[3].style.background = "white";
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                if (name.trim() === "" || birth.length !== 4) {
+                  alert("형식에 맞춰 입력해주세요.");
+                } else {
                   if (
                     window.confirm(
                       `[${name} ${birth}] 입력하신 정보가 맞습니까?`
@@ -308,51 +366,6 @@ function Attendance() {
                       success.current.style.zIndex = "-1";
                     }, 100);
                   }
-                }}
-              >
-                <S.Input
-                  inputMode="numeric"
-                  type="text"
-                  maxLength={4}
-                  placeholder="생일 4자리"
-                  onChange={(e) => {
-                    setBirth(e.target.value);
-                  }}
-                ></S.Input>
-              </form>
-            </S.InputBox>
-
-            <S.Btn
-              ref={(e) => {
-                box.current[3] = e;
-              }}
-              onMouseEnter={() => {
-                if (name !== "" && birth !== "") {
-                  box.current[3].style.background =
-                    "linear-gradient(135deg, #89ec84 0%, #abc0e4 55%, #abc0e4 83%, #c7d5ed 100%)";
-                } else {
-                  box.current[3].style.background = "white";
-                }
-              }}
-              onMouseLeave={() => {
-                box.current[3].style.background = "white";
-              }}
-              onClick={() => {
-                //console.log(name, birth);
-                if (
-                  window.confirm(`[${name} ${birth}] 입력하신 정보가 맞습니까?`)
-                ) {
-                  docheck();
-                  setTimeout(() => {
-                    success.current.style.opacity = "0";
-                    success.current.style.zIndex = "-1";
-                  }, 200);
-                  navigate(`/attendance/${params.clubID}`);
-                } else {
-                  setTimeout(() => {
-                    success.current.style.opacity = "0";
-                    success.current.style.zIndex = "-1";
-                  }, 100);
                 }
               }}
             >
@@ -437,21 +450,12 @@ function Attendance() {
                         <S.MemberDiv>
                           <S.MemberText
                             style={{
-                              /* marginLeft: "2.5%", */
                               width: "50px",
                             }}
                           >
                             {e.user_name}
                           </S.MemberText>
-                          <S.MemberText
-                            style={
-                              {
-                                /* marginRight: "5px" */
-                              }
-                            }
-                          >
-                            {e.code}
-                          </S.MemberText>
+                          <S.MemberText>{e.code}</S.MemberText>
                           <S.MemberText
                             style={{
                               width: "21px",
@@ -696,7 +700,11 @@ function Attendance() {
                                 {e.name}
                               </S.ListMembersText>
                               <S.ListMembersText
-                                style={{ /* marginRight: "30px" */ }}
+                                style={
+                                  {
+                                    /* marginRight: "30px" */
+                                  }
+                                }
                               >
                                 {e.code}
                               </S.ListMembersText>
