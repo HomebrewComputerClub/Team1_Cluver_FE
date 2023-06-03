@@ -437,13 +437,19 @@ function Attendance() {
                         <S.MemberDiv>
                           <S.MemberText
                             style={{
-                              marginLeft: "3%",
+                              /* marginLeft: "2.5%", */
                               width: "50px",
                             }}
                           >
                             {e.user_name}
                           </S.MemberText>
-                          <S.MemberText style={{ marginRight: "5px" }}>
+                          <S.MemberText
+                            style={
+                              {
+                                /* marginRight: "5px" */
+                              }
+                            }
+                          >
                             {e.code}
                           </S.MemberText>
                           <S.MemberText
@@ -535,7 +541,7 @@ function Attendance() {
                             style={{
                               width: "18px",
                               marginLeft: "0",
-                              marginRight: "10px",
+                              /* marginRight: "10px", */
                             }}
                           >
                             <span
@@ -567,7 +573,7 @@ function Attendance() {
                               ></S.Bar>
                             </S.BarArea>
                           </S.MemberText>
-                          <S.MemberText style={{ textAlign: "right" }}>
+                          <S.MemberText style={{ textAlign: "center" }}>
                             {per} %
                           </S.MemberText>
                         </S.MemberDiv>
@@ -682,15 +688,15 @@ function Attendance() {
                             <S.ListMembers>
                               <S.ListMembersText
                                 style={{
-                                  marginLeft: "15px",
-                                  marginRight: "15px",
+                                  /* marginLeft: "15px",
+                                  marginRight: "15px", */
                                   width: "50px",
                                 }}
                               >
                                 {e.name}
                               </S.ListMembersText>
                               <S.ListMembersText
-                                style={{ marginRight: "30px" }}
+                                style={{ /* marginRight: "30px" */ }}
                               >
                                 {e.code}
                               </S.ListMembersText>

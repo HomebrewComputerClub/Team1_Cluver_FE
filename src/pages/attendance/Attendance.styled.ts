@@ -221,10 +221,11 @@ export const MemberDiv = styled.div`
   margin: 5px;
   color: white;
   display: flex;
+  justify-content: space-evenly;
 `;
 
 export const MemberText = styled.div`
-  width: 38px;
+  width: 40px;
   height: 33px;
   //display: inline-block;
   font-size: 14px;
@@ -234,6 +235,9 @@ export const MemberText = styled.div`
   padding-top: 10px;
   text-align: center;
   z-index: 1;
+  @media only screen and (max-width: 344px) {
+    font-size: 11px;
+  }
 `;
 
 export const C = styled.span`
@@ -384,6 +388,7 @@ export const ListMembers = styled.div`
   align-items: center;
   border-bottom: 0.1px solid lightgrey;
   margin-left: 8%;
+  justify-content: space-evenly;
 `;
 
 export const ListMembersText = styled.div`
@@ -393,7 +398,7 @@ export const ListMembersText = styled.div`
   font-size: 15px;
   font-family: ${(props) => props.theme.textFont};
   font-weight: lighter;
-  margin-left: 3px;
+  /* margin-left: 3px; */
   padding-top: 10px;
   text-align: center;
   margin-bottom: 5px;
